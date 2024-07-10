@@ -108,18 +108,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       const SizedBox(height: 40),
                       CustomTextField(
+                        color: Colors.white,
                         mediaQuery: widget.mediaQuery,
                         hint: 'Name',
                         controller: nameController,
                       ),
                       const SizedBox(height: 25),
                       CustomTextField(
+                        color: Colors.white,
                         mediaQuery: widget.mediaQuery,
                         hint: 'Email',
                         controller: emailController,
                       ),
                       const SizedBox(height: 25),
                       CustomTextField(
+                        color: Colors.white,
                         mediaQuery: widget.mediaQuery,
                         hint: 'CNIC',
                         controller: cnicController,

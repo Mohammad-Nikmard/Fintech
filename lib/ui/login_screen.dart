@@ -99,6 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 40),
                     CustomTextField(
+                      color: Colors.white,
                       mediaQuery: widget.mediaQuery,
                       hint: 'User Id',
                       controller: userIdController,

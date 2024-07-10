@@ -42,3 +42,8 @@ flutter:
     - family: SSB
       fonts:
         - asset: assets/fonts/SofiaSans-SemiBold.ttf
+
+
+    - family: SB
+      fonts:
+        - asset: assets/fonts/SofiaSans-Bold.ttf
