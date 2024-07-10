@@ -40,6 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.blackColor,
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Positioned(

@@ -71,64 +71,68 @@ class _SetFingerprintScreenState extends State<SetFingerprintScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                AnimatedSwitcher(
-                  switchInCurve: Curves.decelerate,
-                  switchOutCurve: Curves.decelerate,
+                AnimatedCrossFade(
+                  firstChild: const Center(
+                    child: Text(
+                      'Fingerprint',
+                      key: Key('1'),
+                      style: TextStyle(
+                        fontFamily: 'SR',
+                        fontSize: 30,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  secondChild: const Center(
+                    child: Text(
+                      'Scanning...',
+                      key: Key('2'),
+                      style: TextStyle(
+                        fontFamily: 'SR',
+                        fontSize: 30,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  crossFadeState: !value
+                      ? CrossFadeState.showFirst
+                      : CrossFadeState.showSecond,
+                  firstCurve: Curves.decelerate,
+                  secondCurve: Curves.decelerate,
                   duration: const Duration(milliseconds: 500),
-                  child: value
-                      ? const Center(
-                          child: Text(
-                            'Scanning...',
-                            key: Key('1'),
-                            style: TextStyle(
-                              fontFamily: 'SR',
-                              fontSize: 30,
-                              color: Colors.white,
-                            ),
-                          ),
-                        )
-                      : const Center(
-                          child: Text(
-                            'Fingerprint',
-                            key: Key('2'),
-                            style: TextStyle(
-                              fontFamily: 'SR',
-                              fontSize: 30,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
                 ),
                 const SizedBox(height: 14.69),
-                AnimatedSwitcher(
-                  switchInCurve: Curves.decelerate,
-                  switchOutCurve: Curves.decelerate,
+                AnimatedCrossFade(
+                  firstChild: const Center(
+                    child: Text(
+                      'Place your finger in fingerprint sensor until the icon completely',
+                      key: Key('1'),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'SM',
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  secondChild: const Center(
+                    child: Text(
+                      'Once your scanning is complete, you will be able to sign in by using fingerprint',
+                      key: Key('2'),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'SM',
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  crossFadeState: !value
+                      ? CrossFadeState.showFirst
+                      : CrossFadeState.showSecond,
+                  firstCurve: Curves.decelerate,
+                  secondCurve: Curves.decelerate,
                   duration: const Duration(milliseconds: 500),
-                  child: value
-                      ? const Center(
-                          child: Text(
-                            'Once your scanning is complete, you will be able to sign in by using fingerprint',
-                            key: Key('1'),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'SM',
-                              fontSize: 18,
-                              color: Colors.white,
-                            ),
-                          ),
-                        )
-                      : const Center(
-                          child: Text(
-                            'Place your finger in fingerprint sensor until the icon completely',
-                            key: Key('2'),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'SM',
-                              fontSize: 18,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
                 ),
                 const Spacer(),
                 Padding(
