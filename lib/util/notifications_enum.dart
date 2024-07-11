@@ -18,7 +18,11 @@ Widget notifWidget(
   switch (type) {
     case NotificationEnum.receivedPayment:
       return ReceiveNotif(
-          amount: amount, picture: picture, sender: senderOrneedy);
+        amount: amount,
+        picture: picture,
+        sender: senderOrneedy,
+        mediaQuery: mediaQuery,
+      );
 
     case NotificationEnum.paymentRequest:
       return RequestNotif(

@@ -9,10 +9,12 @@ class CustomAppbar extends StatelessWidget {
     required this.title,
     required this.leftIcon,
     required this.rightIcon,
+    this.isProfile = false,
   });
   final String title;
   final String leftIcon;
   final String rightIcon;
+  final bool isProfile;
 
   @override
   Widget build(BuildContext context) {
@@ -52,31 +54,54 @@ class CustomAppbar extends StatelessWidget {
             color: AppColor.blackColor,
           ),
         ),
-        ClipRRect(
-          borderRadius: const BorderRadius.all(
-            Radius.circular(50),
-          ),
-          child: ColoredBox(
-            color: const Color(0xffe8e9eb),
-            child: SizedBox(
-              height: 47,
-              width: 47,
-              child: Center(
-                child: SizedBox(
-                  height: 22,
-                  width: 22,
-                  child: SvgPicture.asset(
-                    rightIcon.toSvg,
-                    colorFilter: const ColorFilter.mode(
-                      AppColor.greyColor200,
-                      BlendMode.srcIn,
+        if (!isProfile) ...{
+          ClipRRect(
+            borderRadius: const BorderRadius.all(
+              Radius.circular(50),
+            ),
+            child: ColoredBox(
+              color: const Color(0xffe8e9eb),
+              child: SizedBox(
+                height: 47,
+                width: 47,
+                child: Center(
+                  child: SizedBox(
+                    height: 22,
+                    width: 22,
+                    child: SvgPicture.asset(
+                      rightIcon.toSvg,
+                      colorFilter: const ColorFilter.mode(
+                        AppColor.greyColor200,
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
+        } else ...{
+          ClipRRect(
+            borderRadius: const BorderRadius.all(
+              Radius.circular(50),
+            ),
+            child: ColoredBox(
+              color: const Color(0xffe8e9eb),
+              child: SizedBox(
+                height: 47,
+                width: 47,
+                child: FittedBox(
+                  fit: BoxFit.cover,
+                  child: Image(
+                    image: AssetImage(
+                      'assets/images/$rightIcon',
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        }
       ],
     );
   }

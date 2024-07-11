@@ -65,7 +65,8 @@ class NotificationScreen extends StatelessWidget {
               child: CustomAppbar(
                 title: 'Notifications',
                 leftIcon: 'icon_arrow_left',
-                rightIcon: 'icon_notification',
+                rightIcon: 'my_photo.jpg',
+                isProfile: true,
               ),
             ),
           ],
@@ -90,13 +91,13 @@ class _TodayNotifListState extends State<_TodayNotifList> {
     Notifications(
       'David John',
       '560.00',
-      '',
+      'randomP-1.jpg',
       NotificationEnum.receivedPayment,
     ),
     Notifications(
       'Avian Rizky',
       '369.00',
-      '',
+      'randomP-2.jpg',
       NotificationEnum.paymentRequest,
     ),
   ];
@@ -141,19 +142,19 @@ class __ThisWeekNotifListState extends State<_ThisWeekNotifList> {
     Notifications(
       'David John',
       '560.00',
-      '',
+      'randomP-1.jpg',
       NotificationEnum.receivedPayment,
     ),
     Notifications(
       'David John',
       '469.00',
-      '',
+      'randomP-3.jpg',
       NotificationEnum.paymentRequest,
     ),
     Notifications(
       'David John',
       '960.00',
-      '',
+      'randomP-4.jpg',
       NotificationEnum.receivedPayment,
     ),
   ];

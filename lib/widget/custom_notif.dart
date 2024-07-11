@@ -11,10 +11,12 @@ class ReceiveNotif extends StatelessWidget {
     required this.amount,
     required this.picture,
     required this.sender,
+    required this.mediaQuery,
   });
   final String picture;
   final String sender;
   final String amount;
+  final MediaQueryHandler mediaQuery;
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +27,41 @@ class ReceiveNotif extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Row(
             children: [
-              const CircleAvatar(
+              CircleAvatar(
                 radius: 30,
-                backgroundColor: AppColor.blueColor,
+                backgroundImage: AssetImage('assets/images/$picture'),
               ),
               const SizedBox(width: 15),
               SizedBox(
-                width: 252,
-                child: Text(
-                  'You received a payment of $amount from $sender',
-                  style: const TextStyle(
-                    fontFamily: 'SM',
-                    fontSize: 16,
-                    color: AppColor.blackColor,
+                width: mediaQuery.screenWidth(context) - 135,
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      const TextSpan(
+                        text: 'You received a payment of ',
+                        style: TextStyle(
+                          fontFamily: 'SM',
+                          fontSize: 15,
+                          color: AppColor.blackColor,
+                        ),
+                      ),
+                      TextSpan(
+                        text: '\$$amount',
+                        style: const TextStyle(
+                          fontFamily: 'SB',
+                          fontSize: 16,
+                          color: AppColor.blackColor,
+                        ),
+                      ),
+                      TextSpan(
+                        text: ' from $sender',
+                        style: const TextStyle(
+                          fontFamily: 'SM',
+                          fontSize: 16,
+                          color: AppColor.blackColor,
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
@@ -76,19 +100,41 @@ class RequestNotif extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Row(
             children: [
-              const CircleAvatar(
+              CircleAvatar(
                 radius: 30,
-                backgroundColor: AppColor.blueColor,
+                backgroundImage: AssetImage('assets/images/$picture'),
               ),
               const SizedBox(width: 15),
               SizedBox(
                 width: mediaQuery.screenWidth(context) - 200,
-                child: Text(
-                  '$needy request a payment of $amount',
-                  style: const TextStyle(
-                    fontFamily: 'SM',
-                    fontSize: 16,
-                    color: AppColor.blackColor,
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: needy,
+                        style: const TextStyle(
+                          fontFamily: 'SB',
+                          fontSize: 16,
+                          color: AppColor.blackColor,
+                        ),
+                      ),
+                      const TextSpan(
+                        text: ' request a payment of ',
+                        style: TextStyle(
+                          fontFamily: 'SM',
+                          fontSize: 15,
+                          color: AppColor.blackColor,
+                        ),
+                      ),
+                      TextSpan(
+                        text: '\$$amount',
+                        style: const TextStyle(
+                          fontFamily: 'SB',
+                          fontSize: 16,
+                          color: AppColor.blackColor,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -166,7 +212,7 @@ class WarningNotif extends StatelessWidget {
                   'Your monthly expense almost break the budget',
                   style: TextStyle(
                     fontFamily: 'SM',
-                    fontSize: 16,
+                    fontSize: 15,
                     color: AppColor.blackColor,
                   ),
                 ),

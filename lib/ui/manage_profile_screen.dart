@@ -34,7 +34,10 @@ class ManageProfileScreen extends StatelessWidget {
                           width: 91,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
-                            color: AppColor.redDark,
+                            image: DecorationImage(
+                              image: AssetImage('assets/images/my_photo.jpg'),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                         Positioned(
