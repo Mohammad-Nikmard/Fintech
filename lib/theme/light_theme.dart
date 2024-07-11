@@ -2,6 +2,13 @@ import 'package:fintech/constatns/color_constants.dart';
 import 'package:flutter/material.dart';
 
 ThemeData lightTheme = ThemeData(
+  textTheme: const TextTheme(
+    headlineMedium: TextStyle(
+      fontFamily: 'SSB',
+      fontSize: 19,
+      color: AppColor.blackColor,
+    ),
+  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       shape: const RoundedRectangleBorder(

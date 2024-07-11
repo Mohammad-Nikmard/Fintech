@@ -1,4 +1,3 @@
-import 'package:fintech/constatns/color_constants.dart';
 import 'package:fintech/model/notification.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
@@ -24,16 +23,12 @@ class NotificationScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 80),
               child: CustomScrollView(
                 slivers: [
-                  const SliverToBoxAdapter(
+                  SliverToBoxAdapter(
                     child: Padding(
-                      padding: EdgeInsets.only(bottom: 20, left: 30),
+                      padding: const EdgeInsets.only(bottom: 20, left: 30),
                       child: Text(
                         'Today',
-                        style: TextStyle(
-                          fontFamily: 'SSB',
-                          fontSize: 19,
-                          color: AppColor.blackColor,
-                        ),
+                        style: context.headlineMedium,
                       ),
                     ),
                   ),
@@ -49,16 +44,13 @@ class NotificationScreen extends StatelessWidget {
                   _TodayNotifList(
                     mediaQuery: mediaQuery,
                   ),
-                  const SliverToBoxAdapter(
+                  SliverToBoxAdapter(
                     child: Padding(
-                      padding: EdgeInsets.only(bottom: 20, left: 30, top: 20),
+                      padding:
+                          const EdgeInsets.only(bottom: 20, left: 30, top: 20),
                       child: Text(
                         'This Week',
-                        style: TextStyle(
-                          fontFamily: 'SSB',
-                          fontSize: 19,
-                          color: AppColor.blackColor,
-                        ),
+                        style: context.headlineMedium,
                       ),
                     ),
                   ),

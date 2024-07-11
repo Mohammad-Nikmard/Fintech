@@ -130,13 +130,9 @@ class __FieldsSectionState extends State<_FieldsSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Your Name',
-          style: TextStyle(
-            fontFamily: 'SSB',
-            fontSize: 19,
-            color: AppColor.blackColor,
-          ),
+          style: context.headlineMedium,
         ),
         const SizedBox(height: 10),
         CustomTextField(
@@ -147,13 +143,9 @@ class __FieldsSectionState extends State<_FieldsSection> {
           color: context.secondaryContainer,
         ),
         const SizedBox(height: 20),
-        const Text(
+        Text(
           'Email',
-          style: TextStyle(
-            fontFamily: 'SSB',
-            fontSize: 19,
-            color: AppColor.blackColor,
-          ),
+          style: context.headlineMedium,
         ),
         const SizedBox(height: 10),
         CustomTextField(
@@ -164,13 +156,9 @@ class __FieldsSectionState extends State<_FieldsSection> {
           color: context.secondaryContainer,
         ),
         const SizedBox(height: 20),
-        const Text(
+        Text(
           'Mobile Number',
-          style: TextStyle(
-            fontFamily: 'SSB',
-            fontSize: 19,
-            color: AppColor.blackColor,
-          ),
+          style: context.headlineMedium,
         ),
         const SizedBox(height: 10),
         CustomTextField(
@@ -181,13 +169,9 @@ class __FieldsSectionState extends State<_FieldsSection> {
           color: context.secondaryContainer,
         ),
         const SizedBox(height: 20),
-        const Text(
+        Text(
           'Password',
-          style: TextStyle(
-            fontFamily: 'SSB',
-            fontSize: 19,
-            color: AppColor.blackColor,
-          ),
+          style: context.headlineMedium,
         ),
         const SizedBox(height: 10),
         CustomTextField(

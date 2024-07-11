@@ -53,13 +53,9 @@ class _ContactScreenState extends State<ContactScreen> {
                 rightIcon: 'icon_notification',
               ),
               const SizedBox(height: 48),
-              const Text(
+              Text(
                 'Call Us',
-                style: TextStyle(
-                  fontFamily: 'SSB',
-                  fontSize: 19,
-                  color: AppColor.blackColor,
-                ),
+                style: context.headlineMedium,
               ),
               const SizedBox(height: 10),
               CustomTextField(
@@ -84,13 +80,9 @@ class _ContactScreenState extends State<ContactScreen> {
                 color: context.secondaryContainer,
               ),
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 'Your Name',
-                style: TextStyle(
-                  fontFamily: 'SSB',
-                  fontSize: 19,
-                  color: AppColor.blackColor,
-                ),
+                style: context.headlineMedium,
               ),
               const SizedBox(height: 10),
               CustomTextField(

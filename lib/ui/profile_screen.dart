@@ -43,13 +43,9 @@ class ProfileScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 8),
                           child: Row(
                             children: [
-                              const Text(
+                              Text(
                                 'Total Blanace',
-                                style: TextStyle(
-                                  fontFamily: 'SSB',
-                                  fontSize: 19,
-                                  color: AppColor.blackColor,
-                                ),
+                                style: context.headlineMedium,
                               ),
                               const Spacer(),
                               RichText(
@@ -86,16 +82,12 @@ class ProfileScreen extends StatelessWidget {
                       mediaQuery: mediaQuery,
                     ),
                   ),
-                  const SliverToBoxAdapter(
+                  SliverToBoxAdapter(
                     child: Padding(
-                      padding: EdgeInsets.only(bottom: 15),
+                      padding: const EdgeInsets.only(bottom: 15),
                       child: Text(
                         'Recent Transactions',
-                        style: TextStyle(
-                          fontFamily: 'SSB',
-                          fontSize: 19,
-                          color: AppColor.blackColor,
-                        ),
+                        style: context.headlineMedium,
                       ),
                     ),
                   ),

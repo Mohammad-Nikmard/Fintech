@@ -55,13 +55,9 @@ class _ComplainScreenState extends State<ComplainScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Enter your details',
-                        style: TextStyle(
-                          fontFamily: 'SSB',
-                          fontSize: 19,
-                          color: AppColor.blackColor,
-                        ),
+                        style: context.headlineMedium,
                       ),
                       const SizedBox(height: 20),
                       CustomTextField(
@@ -96,13 +92,9 @@ class _ComplainScreenState extends State<ComplainScreen> {
                         color: context.secondaryContainer,
                       ),
                       const SizedBox(height: 31),
-                      const Text(
+                      Text(
                         'Enter your complain',
-                        style: TextStyle(
-                          fontFamily: 'SSB',
-                          fontSize: 19,
-                          color: AppColor.blackColor,
-                        ),
+                        style: context.headlineMedium,
                       ),
                       const SizedBox(height: 20),
                       CustomTextField(

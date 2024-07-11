@@ -80,13 +80,9 @@ class _SettingContentState extends State<_SettingContent> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'My Cards',
-          style: TextStyle(
-            fontFamily: 'SSB',
-            fontSize: 19,
-            color: AppColor.blackColor,
-          ),
+          style: context.headlineMedium,
         ),
         const SizedBox(height: 25),
         CustomBox(
@@ -153,13 +149,9 @@ class _SettingContentState extends State<_SettingContent> {
           ),
         ),
         const SizedBox(height: 25),
-        const Text(
+        Text(
           'Card Settings',
-          style: TextStyle(
-            fontFamily: 'SSB',
-            fontSize: 19,
-            color: AppColor.blackColor,
-          ),
+          style: context.headlineMedium,
         ),
         const SizedBox(height: 25),
         CustomSwitchBox(
@@ -190,13 +182,9 @@ class _SettingContentState extends State<_SettingContent> {
           },
         ),
         const SizedBox(height: 25),
-        const Text(
+        Text(
           'Notifications',
-          style: TextStyle(
-            fontFamily: 'SSB',
-            fontSize: 19,
-            color: AppColor.blackColor,
-          ),
+          style: context.headlineMedium,
         ),
         const SizedBox(height: 25),
         CustomSwitchBox(
