@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
     this.readOnly = false,
     this.showText = false,
     this.textColor = AppColor.blackColor,
+    this.prefixIcon,
   });
   final MediaQueryHandler mediaQuery;
   final String hint;
@@ -20,12 +21,14 @@ class CustomTextField extends StatelessWidget {
   final bool readOnly;
   final bool showText;
   final Color textColor;
+  final Widget? prefixIcon;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: mediaQuery.screenWidth(context),
       child: TextField(
+        readOnly: readOnly,
         obscureText: showText,
         controller: controller,
         style: TextStyle(
@@ -34,6 +37,7 @@ class CustomTextField extends StatelessWidget {
           color: textColor,
         ),
         decoration: InputDecoration(
+          prefixIcon: prefixIcon,
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 23, vertical: 22),
           filled: true,

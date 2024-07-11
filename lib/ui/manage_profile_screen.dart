@@ -144,7 +144,7 @@ class __FieldsSectionState extends State<_FieldsSection> {
           mediaQuery: widget.mediaQuery,
           hint: '',
           controller: nameController,
-          color: const Color(0xffe8e9eb),
+          color: const Color(0xfff1f2f3),
         ),
         const SizedBox(height: 20),
         const Text(
@@ -161,7 +161,7 @@ class __FieldsSectionState extends State<_FieldsSection> {
           mediaQuery: widget.mediaQuery,
           hint: '',
           controller: emailController,
-          color: const Color(0xffe8e9eb),
+          color: const Color(0xfff1f2f3),
         ),
         const SizedBox(height: 20),
         const Text(
@@ -178,7 +178,7 @@ class __FieldsSectionState extends State<_FieldsSection> {
           mediaQuery: widget.mediaQuery,
           hint: '',
           controller: mobileController,
-          color: const Color(0xffe8e9eb),
+          color: const Color(0xfff1f2f3),
         ),
         const SizedBox(height: 20),
         const Text(
@@ -196,7 +196,7 @@ class __FieldsSectionState extends State<_FieldsSection> {
           mediaQuery: widget.mediaQuery,
           hint: '',
           controller: passwordController,
-          color: const Color(0xffe8e9eb),
+          color: const Color(0xfff1f2f3),
         ),
         const SizedBox(height: 30),
         Padding(
