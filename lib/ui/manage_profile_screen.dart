@@ -191,6 +191,7 @@ class __FieldsSectionState extends State<_FieldsSection> {
         ),
         const SizedBox(height: 10),
         CustomTextField(
+          maxLines: 1,
           textColor: AppColor.greyColor200,
           showText: true,
           mediaQuery: widget.mediaQuery,

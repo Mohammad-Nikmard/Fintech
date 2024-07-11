@@ -13,6 +13,7 @@ class CustomTextField extends StatelessWidget {
     this.showText = false,
     this.textColor = AppColor.blackColor,
     this.prefixIcon,
+    this.maxLines,
   });
   final MediaQueryHandler mediaQuery;
   final String hint;
@@ -22,12 +23,14 @@ class CustomTextField extends StatelessWidget {
   final bool showText;
   final Color textColor;
   final Widget? prefixIcon;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: mediaQuery.screenWidth(context),
       child: TextField(
+        maxLines: maxLines,
         readOnly: readOnly,
         obscureText: showText,
         controller: controller,
