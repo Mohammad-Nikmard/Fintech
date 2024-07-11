@@ -81,7 +81,7 @@ class _ContactScreenState extends State<ContactScreen> {
                 mediaQuery: widget.mediaQuery,
                 hint: '',
                 controller: callController,
-                color: const Color(0xfff1f2f3),
+                color: context.secondaryContainer,
               ),
               const SizedBox(height: 20),
               const Text(
@@ -112,7 +112,7 @@ class _ContactScreenState extends State<ContactScreen> {
                 mediaQuery: widget.mediaQuery,
                 hint: '',
                 controller: emailController,
-                color: const Color(0xfff1f2f3),
+                color: context.secondaryContainer,
               ),
             ],
           ),

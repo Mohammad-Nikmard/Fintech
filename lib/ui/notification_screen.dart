@@ -37,12 +37,12 @@ class NotificationScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SliverToBoxAdapter(
+                  SliverToBoxAdapter(
                     child: Padding(
-                      padding: EdgeInsets.only(bottom: 10),
+                      padding: const EdgeInsets.only(bottom: 10),
                       child: Divider(
                         thickness: 1.5,
-                        color: Color(0xfff1f2f3),
+                        color: context.secondaryContainer,
                       ),
                     ),
                   ),

@@ -5,4 +5,5 @@ extension ThemeExtension on BuildContext {
   Color get primaryText => Theme.of(this).colorScheme.primary;
   Color get secondaryText => Theme.of(this).colorScheme.secondary;
   Color get primaryContainer => Theme.of(this).colorScheme.primaryContainer;
+  Color get secondaryContainer => Theme.of(this).colorScheme.secondaryContainer;
 }

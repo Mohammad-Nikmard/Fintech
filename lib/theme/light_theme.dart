@@ -22,5 +22,6 @@ ThemeData lightTheme = ThemeData(
     primaryContainer: Colors.white,
     primary: Color(0xff202A34),
     secondary: AppColor.greyColor200,
+    secondaryContainer: Color(0xfff1f2f3),
   ),
 );

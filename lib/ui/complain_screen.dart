@@ -69,7 +69,7 @@ class _ComplainScreenState extends State<ComplainScreen> {
                         mediaQuery: widget.mediaQuery,
                         hint: 'First Name',
                         controller: firstNameController,
-                        color: const Color(0xfff1f2f3),
+                        color: context.secondaryContainer,
                       ),
                       const SizedBox(height: 10),
                       CustomTextField(
@@ -77,7 +77,7 @@ class _ComplainScreenState extends State<ComplainScreen> {
                         mediaQuery: widget.mediaQuery,
                         hint: 'Last Name',
                         controller: lastNameController,
-                        color: const Color(0xfff1f2f3),
+                        color: context.secondaryContainer,
                       ),
                       const SizedBox(height: 10),
                       CustomTextField(
@@ -85,7 +85,7 @@ class _ComplainScreenState extends State<ComplainScreen> {
                         mediaQuery: widget.mediaQuery,
                         hint: 'Mobile Number',
                         controller: mobileController,
-                        color: const Color(0xfff1f2f3),
+                        color: context.secondaryContainer,
                       ),
                       const SizedBox(height: 10),
                       CustomTextField(
@@ -93,7 +93,7 @@ class _ComplainScreenState extends State<ComplainScreen> {
                         mediaQuery: widget.mediaQuery,
                         hint: 'CNIC',
                         controller: cnicController,
-                        color: const Color(0xfff1f2f3),
+                        color: context.secondaryContainer,
                       ),
                       const SizedBox(height: 31),
                       const Text(
@@ -111,7 +111,7 @@ class _ComplainScreenState extends State<ComplainScreen> {
                         mediaQuery: widget.mediaQuery,
                         hint: 'Type your message here...',
                         controller: cnicController,
-                        color: const Color(0xfff1f2f3),
+                        color: context.secondaryContainer,
                       ),
                       const SizedBox(height: 50),
                       Padding(

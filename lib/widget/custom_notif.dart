@@ -1,5 +1,6 @@
 import 'package:fintech/constatns/color_constants.dart';
 import 'package:fintech/util/extensions/string_extension.dart';
+import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -44,9 +45,9 @@ class ReceiveNotif extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 15),
-        const Divider(
+        Divider(
           thickness: 1.5,
-          color: Color(0xfff1f2f3),
+          color: context.secondaryContainer,
         ),
       ],
     );
@@ -120,9 +121,9 @@ class RequestNotif extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 15),
-        const Divider(
+        Divider(
           thickness: 1.5,
-          color: Color(0xfff1f2f3),
+          color: context.secondaryContainer,
         ),
       ],
     );
@@ -174,9 +175,9 @@ class WarningNotif extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 15),
-        const Divider(
+        Divider(
           thickness: 1.5,
-          color: Color(0xfff1f2f3),
+          color: context.secondaryContainer,
         ),
       ],
     );
