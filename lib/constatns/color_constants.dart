@@ -12,4 +12,6 @@ class AppColor {
   static const blueColor = Color(0xff456EFE);
   static Color blueThin = blueColor.withOpacity(0.3);
   static Color blueLight = blueColor.withOpacity(0.15);
+  static const yellowDark = Color(0xfff8c74e);
+  static Color yellowLight = yellowDark.withOpacity(0.15);
 }
