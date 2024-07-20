@@ -45,11 +45,6 @@ class _PinCodeChangeScreenState extends State<PinCodeChangeScreen> {
                       ),
                     } else if (progressIndicator == 1) ...{
                       _OTPSection(
-                        onTapped: () {
-                          setState(() {
-                            progressIndicator = 2;
-                          });
-                        },
                         mediaQuery: widget.mediaQuery,
                       ),
                     }
@@ -219,10 +214,8 @@ class _MobileNumberSectionState extends State<_MobileNumberSection> {
 
 class _OTPSection extends StatefulWidget {
   const _OTPSection({
-    required this.onTapped,
     required this.mediaQuery,
   });
-  final VoidCallback onTapped;
   final MediaQueryHandler mediaQuery;
 
   @override
@@ -383,7 +376,16 @@ class _OTPSectionState extends State<_OTPSection> {
             width: widget.mediaQuery.screenWidth(context),
             child: ElevatedButton(
               onPressed: () {
-                widget.onTapped();
+                FocusManager.instance.primaryFocus?.unfocus();
+                showModalBottomSheet(
+                  backgroundColor: Colors.transparent,
+                  context: context,
+                  builder: (context) {
+                    return _NewPinCodeSection(
+                      mediaQuery: widget.mediaQuery,
+                    );
+                  },
+                );
               },
               child: const Text(
                 'Next',
@@ -395,6 +397,236 @@ class _OTPSectionState extends State<_OTPSection> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _NewPinCodeSection extends StatefulWidget {
+  const _NewPinCodeSection({
+    required this.mediaQuery,
+  });
+  final MediaQueryHandler mediaQuery;
+
+  @override
+  State<_NewPinCodeSection> createState() => _NewPinCodeSectionState();
+}
+
+class _NewPinCodeSectionState extends State<_NewPinCodeSection> {
+  late TextEditingController pinController;
+  late TextEditingController pinConfirmController;
+
+  String pin = '*';
+  String pinConfirm = '';
+
+  @override
+  void initState() {
+    super.initState();
+    pinController = TextEditingController();
+    pinConfirmController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    pinController.dispose();
+    pinConfirmController.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+        color: context.background,
+      ),
+      height: 501,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: SvgPicture.asset(
+                    'icon_close'.toSvg,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              'Enter New Pin',
+              style: TextStyle(
+                fontFamily: 'SB',
+                fontSize: 19,
+                color: AppColor.blackColor,
+              ),
+            ),
+            const SizedBox(height: 15),
+            SizedBox(
+              height: 58,
+              child: Pinput(
+                onChanged: (value) {
+                  setState(() {
+                    pin = value;
+                  });
+                },
+                obscuringWidget: const Padding(
+                  padding: EdgeInsets.only(top: 15),
+                  child: Text(
+                    '*',
+                    style: TextStyle(
+                      fontFamily: 'SB',
+                      fontSize: 30,
+                      color: AppColor.blackColor,
+                    ),
+                  ),
+                ),
+                obscureText: true,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                controller: pinController,
+                length: 5,
+                defaultPinTheme: const PinTheme(
+                  height: 58,
+                  width: 58,
+                  decoration: BoxDecoration(
+                    color: Color(0xfff1f2f3),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                  ),
+                ),
+                focusedPinTheme: PinTheme(
+                  height: 58,
+                  width: 58,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                    border: Border.all(
+                      color: AppColor.blueColor,
+                      width: 1.3,
+                    ),
+                  ),
+                ),
+                pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+              ),
+            ),
+            const SizedBox(height: 37),
+            const Text(
+              'Confirm Pin Code',
+              style: TextStyle(
+                fontFamily: 'SB',
+                fontSize: 19,
+                color: AppColor.blackColor,
+              ),
+            ),
+            const SizedBox(height: 15),
+            SizedBox(
+              height: 58,
+              child: Pinput(
+                onChanged: (value) {
+                  setState(() {
+                    pinConfirm = value;
+                  });
+                },
+                obscuringWidget: const Padding(
+                  padding: EdgeInsets.only(top: 15),
+                  child: Text(
+                    '*',
+                    style: TextStyle(
+                      fontFamily: 'SB',
+                      fontSize: 30,
+                      color: AppColor.blackColor,
+                    ),
+                  ),
+                ),
+                obscureText: true,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                controller: pinConfirmController,
+                length: 5,
+                defaultPinTheme: const PinTheme(
+                  height: 58,
+                  width: 58,
+                  decoration: BoxDecoration(
+                    color: Color(0xfff1f2f3),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                  ),
+                ),
+                focusedPinTheme: PinTheme(
+                  height: 58,
+                  width: 58,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                    border: Border.all(
+                      color: AppColor.blueColor,
+                      width: 1.3,
+                    ),
+                  ),
+                ),
+                pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+              ),
+            ),
+            const SizedBox(height: 15),
+            Row(
+              children: [
+                Text(
+                  (pin == pinConfirm)
+                      ? 'Your PIN codes are the same'
+                      : 'Your PIN codes are not the same',
+                  style: const TextStyle(
+                    fontFamily: 'SM',
+                    fontSize: 16,
+                    color: AppColor.blackColor,
+                  ),
+                ),
+                const SizedBox(width: 5),
+                SvgPicture.asset(
+                  (pin == pinConfirm) ? 'icon_tick'.toSvg : 'icon_close'.toSvg,
+                  height: 12,
+                  width: 12,
+                  colorFilter: ColorFilter.mode(
+                    (pin == pinConfirm) ? AppColor.blueColor : AppColor.redDark,
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 63),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 26),
+              child: SizedBox(
+                height: 63,
+                width: widget.mediaQuery.screenWidth(context),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    'Done',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
