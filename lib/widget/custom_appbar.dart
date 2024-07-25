@@ -9,43 +9,68 @@ class CustomAppbar extends StatelessWidget {
     required this.title,
     required this.leftIcon,
     required this.rightIcon,
-    this.isProfile = false,
+    this.isRightProfile = false,
+    this.isLeftProfile = false,
   });
   final String title;
   final String leftIcon;
   final String rightIcon;
-  final bool isProfile;
+  final bool isRightProfile;
+  final bool isLeftProfile;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        ClipRRect(
-          borderRadius: const BorderRadius.all(
-            Radius.circular(50),
-          ),
-          child: ColoredBox(
-            color: const Color(0xffe8e9eb),
-            child: SizedBox(
-              height: 47,
-              width: 47,
-              child: Center(
-                child: SizedBox(
-                  height: 18,
-                  width: 18,
-                  child: SvgPicture.asset(
-                    leftIcon.toSvg,
-                    colorFilter: const ColorFilter.mode(
-                      AppColor.greyColor200,
-                      BlendMode.srcIn,
+        if (!isLeftProfile) ...{
+          ClipRRect(
+            borderRadius: const BorderRadius.all(
+              Radius.circular(50),
+            ),
+            child: ColoredBox(
+              color: const Color(0xffe8e9eb),
+              child: SizedBox(
+                height: 47,
+                width: 47,
+                child: Center(
+                  child: SizedBox(
+                    height: 18,
+                    width: 18,
+                    child: SvgPicture.asset(
+                      leftIcon.toSvg,
+                      colorFilter: const ColorFilter.mode(
+                        AppColor.greyColor200,
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
+        } else ...{
+          ClipRRect(
+            borderRadius: const BorderRadius.all(
+              Radius.circular(50),
+            ),
+            child: ColoredBox(
+              color: const Color(0xffe8e9eb),
+              child: SizedBox(
+                height: 47,
+                width: 47,
+                child: FittedBox(
+                  fit: BoxFit.cover,
+                  child: Image(
+                    image: AssetImage(
+                      'assets/images/$leftIcon',
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        },
         Text(
           title,
           style: const TextStyle(
@@ -54,7 +79,7 @@ class CustomAppbar extends StatelessWidget {
             color: AppColor.blackColor,
           ),
         ),
-        if (!isProfile) ...{
+        if (!isRightProfile) ...{
           ClipRRect(
             borderRadius: const BorderRadius.all(
               Radius.circular(50),

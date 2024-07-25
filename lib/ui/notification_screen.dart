@@ -66,7 +66,7 @@ class NotificationScreen extends StatelessWidget {
                 title: 'Notifications',
                 leftIcon: 'icon_arrow_left',
                 rightIcon: 'my_photo.jpg',
-                isProfile: true,
+                isRightProfile: true,
               ),
             ),
           ],
