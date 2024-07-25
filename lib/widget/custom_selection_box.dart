@@ -56,7 +56,7 @@ class CustomSelectionBox extends StatelessWidget {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(4.0),
                 child: AnimatedContainer(
                   curve: Curves.decelerate,
                   duration: const Duration(milliseconds: 250),
