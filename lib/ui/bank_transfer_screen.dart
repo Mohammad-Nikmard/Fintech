@@ -4,6 +4,8 @@ import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/custom_payment_confirmation.dart';
+import 'package:fintech/widget/custom_payment_success.dart';
+import 'package:fintech/widget/custom_receipt_content.dart';
 import 'package:fintech/widget/custom_selection_box.dart';
 import 'package:fintech/widget/my_textfield.dart';
 import 'package:flutter/material.dart';
@@ -160,7 +162,95 @@ class _BankTransferScreenState extends State<BankTransferScreen> {
               } else if (progressIndicator == 4) ...{
                 Padding(
                   padding: const EdgeInsets.only(top: 80),
-                  child: _SuccessfulTransferSection(
+                  child: CustomPaymentSuccessful(
+                    receipt: CustomReceiptContent(
+                      icon: Positioned(
+                        top: -30,
+                        child: Container(
+                          height: 75,
+                          width: 75,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                            border: Border.all(
+                              width: 2,
+                              color: Colors.white,
+                            ),
+                            image: const DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage('assets/images/my_photo.jpg'),
+                            ),
+                          ),
+                        ),
+                      ),
+                      title: 'Mohammad Nikmard',
+                      amount: '250.00',
+                      firstRowContent: const Row(
+                        children: [
+                          Text(
+                            'Card Type',
+                            style: TextStyle(
+                              fontFamily: 'SM',
+                              fontSize: 18,
+                              color: AppColor.greyColor200,
+                            ),
+                          ),
+                          Spacer(),
+                          Text(
+                            'Debit Card',
+                            style: TextStyle(
+                              fontFamily: 'SM',
+                              fontSize: 18,
+                              color: AppColor.blackColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                      secondRowContent: Row(
+                        children: [
+                          const Text(
+                            'Transfer Fee',
+                            style: TextStyle(
+                              fontFamily: 'SM',
+                              fontSize: 18,
+                              color: AppColor.greyColor200,
+                            ),
+                          ),
+                          const Spacer(),
+                          RichText(
+                            text: const TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: '\$',
+                                  style: TextStyle(
+                                    fontFamily: 'SR',
+                                    fontSize: 18,
+                                    color: AppColor.blackColor,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: '0.00',
+                                  style: TextStyle(
+                                    fontFamily: 'SB',
+                                    fontSize: 18,
+                                    color: AppColor.blackColor,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: 'USD',
+                                  style: TextStyle(
+                                    fontFamily: 'SM',
+                                    fontSize: 10,
+                                    color: AppColor.blackColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    text: 'Your money has been transferred successfully',
                     mediaQuery: widget.mediaQuery,
                   ),
                 ),
@@ -939,278 +1029,6 @@ class _TransferDescriptionSection extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.white,
                 ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _SuccessfulTransferSection extends StatelessWidget {
-  const _SuccessfulTransferSection({
-    required this.mediaQuery,
-  });
-  final MediaQueryHandler mediaQuery;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Center(
-          child: Text(
-            'Transfer Successful',
-            style: TextStyle(
-              fontFamily: 'SSB',
-              fontSize: 32,
-              color: AppColor.blueColor,
-            ),
-          ),
-        ),
-        const SizedBox(height: 10),
-        const Center(
-          child: Text(
-            'Your money has been transferred successfully',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'SM',
-              fontSize: 18,
-              color: AppColor.greyColor200,
-            ),
-          ),
-        ),
-        const SizedBox(height: 70),
-        SvgPicture.asset(
-          'success_vector'.toSvg,
-        ),
-        const Spacer(),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 35),
-          child: SizedBox(
-            height: 63,
-            width: mediaQuery.screenWidth(context),
-            child: ElevatedButton(
-              onPressed: () {
-                showModalBottomSheet(
-                  backgroundColor: Colors.transparent,
-                  context: context,
-                  builder: (context) {
-                    return const _ReceiptContent();
-                  },
-                );
-              },
-              child: const Text(
-                'Veiw Receipt',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-        )
-      ],
-    );
-  }
-}
-
-class _ReceiptContent extends StatelessWidget {
-  const _ReceiptContent();
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      alignment: AlignmentDirectional.topCenter,
-      children: [
-        Container(
-          height: 400,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-            color: Colors.white,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const SizedBox(height: 55),
-              const Center(
-                child: Text(
-                  'Mohammad Nikmard',
-                  style: TextStyle(
-                    fontFamily: 'SSB',
-                    fontSize: 26,
-                    color: AppColor.blackColor,
-                  ),
-                ),
-              ),
-              const Center(
-                child: Text(
-                  '*******4183',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: AppColor.greyColor200,
-                    fontFamily: 'SM',
-                  ),
-                ),
-              ),
-              const SizedBox(height: 15),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Column(
-                  children: [
-                    ClipRRect(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                      child: SizedBox(
-                        height: 38,
-                        width: 249,
-                        child: ColoredBox(
-                          color: AppColor.greenLight,
-                          child: const Center(
-                            child: Text(
-                              'Transaction Status: Paid',
-                              style: TextStyle(
-                                fontFamily: 'SSB',
-                                fontSize: 16,
-                                color: AppColor.greenDark,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    RichText(
-                      text: const TextSpan(
-                        children: [
-                          TextSpan(
-                            text: '\$',
-                            style: TextStyle(
-                              fontFamily: 'SR',
-                              fontSize: 36,
-                              color: AppColor.blackColor,
-                            ),
-                          ),
-                          TextSpan(
-                            text: '250.00',
-                            style: TextStyle(
-                              fontFamily: 'SB',
-                              fontSize: 36,
-                              color: AppColor.blackColor,
-                            ),
-                          ),
-                          TextSpan(
-                            text: 'USD',
-                            style: TextStyle(
-                              fontFamily: 'SSB',
-                              fontSize: 18,
-                              color: AppColor.greyColor200,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    Column(
-                      children: [
-                        const Row(
-                          children: [
-                            Text(
-                              'Card Type',
-                              style: TextStyle(
-                                fontFamily: 'SM',
-                                fontSize: 18,
-                                color: AppColor.greyColor200,
-                              ),
-                            ),
-                            Spacer(),
-                            Text(
-                              'Debit Card',
-                              style: TextStyle(
-                                fontFamily: 'SM',
-                                fontSize: 18,
-                                color: AppColor.blackColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 15),
-                        const Divider(
-                          height: 0,
-                          thickness: 1.5,
-                          color: Color(0xffe5e7e9),
-                        ),
-                        const SizedBox(height: 15),
-                        Row(
-                          children: [
-                            const Text(
-                              'Transfer Fee',
-                              style: TextStyle(
-                                fontFamily: 'SM',
-                                fontSize: 18,
-                                color: AppColor.greyColor200,
-                              ),
-                            ),
-                            const Spacer(),
-                            RichText(
-                              text: const TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: '\$',
-                                    style: TextStyle(
-                                      fontFamily: 'SR',
-                                      fontSize: 18,
-                                      color: AppColor.blackColor,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: '0.00',
-                                    style: TextStyle(
-                                      fontFamily: 'SB',
-                                      fontSize: 18,
-                                      color: AppColor.blackColor,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: 'USD',
-                                    style: TextStyle(
-                                      fontFamily: 'SM',
-                                      fontSize: 10,
-                                      color: AppColor.blackColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        Positioned(
-          top: -30,
-          child: Container(
-            height: 75,
-            width: 75,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-              border: Border.all(
-                width: 2,
-                color: Colors.white,
-              ),
-              image: const DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/my_photo.jpg'),
               ),
             ),
           ),
