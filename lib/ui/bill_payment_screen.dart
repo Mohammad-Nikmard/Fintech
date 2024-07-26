@@ -3,6 +3,7 @@ import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
 import 'package:fintech/widget/custom_appbar.dart';
+import 'package:fintech/widget/custom_payment_confirmation.dart';
 import 'package:fintech/widget/custom_selection_box.dart';
 import 'package:fintech/widget/my_textfield.dart';
 import 'package:flutter/material.dart';
@@ -50,9 +51,82 @@ class _BillPaymentScreenState extends State<BillPaymentScreen> {
                     },
                   ),
                 ),
-              } else if (progressIndicator == 1)
-                ...{}
-              else if (progressIndicator == 2)
+              } else if (progressIndicator == 1) ...{
+                Padding(
+                  padding: const EdgeInsets.only(top: 80),
+                  child: CustomPaymentConfirmation(
+                    buttonText: 'Pay Now',
+                    secondRowDescription: const Row(
+                      children: [
+                        Text(
+                          'Due Date',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.greyColor200,
+                          ),
+                        ),
+                        Spacer(),
+                        Text(
+                          'September 10,2024',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.blackColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    firstRowDescription: const Row(
+                      children: [
+                        Text(
+                          'Bill Number',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.greyColor200,
+                          ),
+                        ),
+                        Spacer(),
+                        Text(
+                          '12569874564',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.blackColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    amount: '350.00',
+                    paymentStatus: 'Unpaid',
+                    icon: Positioned(
+                      top: -45,
+                      child: CircleAvatar(
+                        radius: 45,
+                        backgroundColor: AppColor.blackColor,
+                        child: SvgPicture.asset(
+                          tappedIconPath,
+                          height: 36,
+                          width: 36,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.white,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                      ),
+                    ),
+                    text:
+                        'Please make sure that you want to pay electricity bill',
+                    mediaQuery: widget.mediaQuery,
+                    onTapped: () {
+                      setState(() {
+                        progressIndicator = 2;
+                      });
+                    },
+                  ),
+                )
+              } else if (progressIndicator == 2)
                 ...{},
               Padding(
                 padding: const EdgeInsets.only(top: 10),
