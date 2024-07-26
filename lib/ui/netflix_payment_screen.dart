@@ -233,11 +233,14 @@ class _NetflixPaymentScreenState extends State<NetflixPaymentScreen> {
                   ),
                 ),
               },
-              const Padding(
-                padding: EdgeInsets.only(top: 10),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
                 child: CustomAppbar(
-                  title: 'Netflix Payment',
-                  leftIcon: 'icon_arrow_left',
+                  title: topicConditions(),
+                  leftIcon: (progressIndicator > 1)
+                      ? 'my_photo.jpg'
+                      : 'icon_arrow_left',
+                  isLeftProfile: (progressIndicator > 1) ? true : false,
                   rightIcon: 'icon_notification',
                 ),
               ),
@@ -246,6 +249,16 @@ class _NetflixPaymentScreenState extends State<NetflixPaymentScreen> {
         ),
       ),
     );
+  }
+
+  String topicConditions() {
+    if (progressIndicator == 0) {
+      return 'Netflix Payment';
+    } else if (progressIndicator == 1) {
+      return 'Pay Bill';
+    } else {
+      return 'Confirmation';
+    }
   }
 }
 
