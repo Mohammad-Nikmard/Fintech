@@ -4,6 +4,7 @@ import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/custom_box.dart';
+import 'package:fintech/widget/custom_payment_confirmation.dart';
 import 'package:fintech/widget/my_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -43,6 +44,101 @@ class _NetflixPaymentScreenState extends State<NetflixPaymentScreen> {
                     },
                   ),
                 )
+              } else if (progressIndicator == 1) ...{
+                Padding(
+                  padding: const EdgeInsets.only(top: 80),
+                  child: CustomPaymentConfirmation(
+                    buttonText: 'Pay Now',
+                    secondRowDescription: const Row(
+                      children: [
+                        Text(
+                          'Due Date',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.greyColor200,
+                          ),
+                        ),
+                        Spacer(),
+                        Text(
+                          'August 6, 2024',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.blackColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    firstRowDescription: Row(
+                      children: [
+                        const Text(
+                          'Transfer fee',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.greyColor200,
+                          ),
+                        ),
+                        const Spacer(),
+                        RichText(
+                          text: const TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '\$',
+                                style: TextStyle(
+                                  fontFamily: 'SR',
+                                  fontSize: 18,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              TextSpan(
+                                text: '0.00',
+                                style: TextStyle(
+                                  fontFamily: 'SB',
+                                  fontSize: 18,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'USD',
+                                style: TextStyle(
+                                  fontFamily: 'SM',
+                                  fontSize: 10,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    amount: '1.00',
+                    paymentStatus: 'Unpaid',
+                    icon: const Positioned(
+                      top: -35,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                        child: SizedBox(
+                          height: 75,
+                          width: 75,
+                          child: ColoredBox(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                    text: 'Please make sure that you want to pay netflix bill',
+                    mediaQuery: widget.mediaQuery,
+                    onTapped: () {
+                      setState(() {
+                        progressIndicator = 2;
+                      });
+                    },
+                  ),
+                ),
               },
               const Padding(
                 padding: EdgeInsets.only(top: 10),
