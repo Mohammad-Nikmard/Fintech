@@ -4,6 +4,8 @@ import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/custom_payment_confirmation.dart';
+import 'package:fintech/widget/custom_payment_success.dart';
+import 'package:fintech/widget/custom_receipt_content.dart';
 import 'package:fintech/widget/custom_selection_box.dart';
 import 'package:fintech/widget/my_textfield.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +70,7 @@ class _BillPaymentScreenState extends State<BillPaymentScreen> {
                         ),
                         Spacer(),
                         Text(
-                          'September 10,2024',
+                          'September 10, 2024',
                           style: TextStyle(
                             fontFamily: 'SM',
                             fontSize: 18,
@@ -126,8 +128,80 @@ class _BillPaymentScreenState extends State<BillPaymentScreen> {
                     },
                   ),
                 )
-              } else if (progressIndicator == 2)
-                ...{},
+              } else if (progressIndicator == 2) ...{
+                Padding(
+                  padding: const EdgeInsets.only(top: 80),
+                  child: CustomPaymentSuccessful(
+                    title: 'Congratulations!',
+                    receipt: CustomReceiptContent(
+                      subtitle: '',
+                      icon: Positioned(
+                        top: -45,
+                        child: CircleAvatar(
+                          radius: 45,
+                          backgroundColor: AppColor.blackColor,
+                          child: SvgPicture.asset(
+                            tappedIconPath,
+                            height: 36,
+                            width: 36,
+                            colorFilter: const ColorFilter.mode(
+                              Colors.white,
+                              BlendMode.srcIn,
+                            ),
+                          ),
+                        ),
+                      ),
+                      title: 'Electricity Bill',
+                      amount: '350.00',
+                      firstRowContent: const Row(
+                        children: [
+                          Text(
+                            'Bill Number',
+                            style: TextStyle(
+                              fontFamily: 'SM',
+                              fontSize: 18,
+                              color: AppColor.greyColor200,
+                            ),
+                          ),
+                          Spacer(),
+                          Text(
+                            '12569874564',
+                            style: TextStyle(
+                              fontFamily: 'SM',
+                              fontSize: 18,
+                              color: AppColor.blackColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                      secondRowContent: const Row(
+                        children: [
+                          Text(
+                            'Transfer Fee',
+                            style: TextStyle(
+                              fontFamily: 'SM',
+                              fontSize: 18,
+                              color: AppColor.greyColor200,
+                            ),
+                          ),
+                          Spacer(),
+                          Text(
+                            'September 10, 2024',
+                            style: TextStyle(
+                              fontFamily: 'SM',
+                              fontSize: 18,
+                              color: AppColor.blackColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    text:
+                        'Your electricity bill payment has been paid successfully',
+                    mediaQuery: widget.mediaQuery,
+                  ),
+                ),
+              },
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: CustomAppbar(

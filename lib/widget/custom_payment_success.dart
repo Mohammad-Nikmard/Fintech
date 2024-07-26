@@ -9,20 +9,22 @@ class CustomPaymentSuccessful extends StatelessWidget {
     super.key,
     required this.mediaQuery,
     required this.text,
+    required this.title,
     required this.receipt,
   });
   final MediaQueryHandler mediaQuery;
   final String text;
+  final String title;
   final Widget receipt;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Center(
+        Center(
           child: Text(
-            'Transfer Successful',
-            style: TextStyle(
+            title,
+            style: const TextStyle(
               fontFamily: 'SSB',
               fontSize: 32,
               color: AppColor.blueColor,

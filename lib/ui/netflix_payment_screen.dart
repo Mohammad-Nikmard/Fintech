@@ -145,7 +145,9 @@ class _NetflixPaymentScreenState extends State<NetflixPaymentScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 80),
                   child: CustomPaymentSuccessful(
+                    title: 'Transfer Successful',
                     receipt: CustomReceiptContent(
+                      subtitle: '*******4183',
                       icon: const Positioned(
                         top: -35,
                         child: ClipRRect(

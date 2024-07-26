@@ -9,9 +9,11 @@ class CustomReceiptContent extends StatelessWidget {
     required this.firstRowContent,
     required this.secondRowContent,
     required this.icon,
+    required this.subtitle,
   });
   final String amount;
   final String title;
+  final String subtitle;
   final Widget firstRowContent;
   final Widget secondRowContent;
   final Widget icon;
@@ -45,10 +47,10 @@ class CustomReceiptContent extends StatelessWidget {
                   ),
                 ),
               ),
-              const Center(
+              Center(
                 child: Text(
-                  '*******4183',
-                  style: TextStyle(
+                  subtitle,
+                  style: const TextStyle(
                     fontSize: 16,
                     color: AppColor.greyColor200,
                     fontFamily: 'SM',

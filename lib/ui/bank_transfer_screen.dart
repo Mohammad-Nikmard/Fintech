@@ -163,7 +163,9 @@ class _BankTransferScreenState extends State<BankTransferScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 80),
                   child: CustomPaymentSuccessful(
+                    title: 'Transfer Successful',
                     receipt: CustomReceiptContent(
+                      subtitle: '*******4183',
                       icon: Positioned(
                         top: -30,
                         child: Container(
