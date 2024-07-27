@@ -17,7 +17,7 @@ class CustomBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: mediaQuery.screenWidth(context),
-      height: 81,
+      height: height,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(

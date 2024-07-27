@@ -1,7 +1,6 @@
 import 'package:fintech/constatns/color_constants.dart';
 import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
@@ -83,7 +82,8 @@ class _CustomSwitchBoxState extends State<CustomSwitchBox> {
                       Radius.circular(20),
                     ),
                   ),
-                  color: widget.smallBoxColor,
+                  color: widget.smallBoxColor ??
+                      widget.iconColor.withOpacity(0.15),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(6.0),
