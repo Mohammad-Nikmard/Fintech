@@ -15,6 +15,7 @@ class CustomPaymentConfirmation extends StatelessWidget {
     required this.firstRowDescription,
     required this.secondRowDescription,
     required this.buttonText,
+    required this.title,
   });
   final MediaQueryHandler mediaQuery;
   final VoidCallback onTapped;
@@ -25,6 +26,7 @@ class CustomPaymentConfirmation extends StatelessWidget {
   final Widget firstRowDescription;
   final Widget secondRowDescription;
   final String buttonText;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -72,9 +74,9 @@ class CustomPaymentConfirmation extends StatelessWidget {
                         const EdgeInsets.only(left: 35, right: 35, top: 56),
                     child: Column(
                       children: [
-                        const Text(
-                          'Mohammad Nikmard',
-                          style: TextStyle(
+                        Text(
+                          title,
+                          style: const TextStyle(
                             fontFamily: 'SSB',
                             fontSize: 26,
                             color: AppColor.blackColor,

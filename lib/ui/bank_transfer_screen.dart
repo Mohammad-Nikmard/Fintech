@@ -74,6 +74,7 @@ class _BankTransferScreenState extends State<BankTransferScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 80),
                   child: CustomPaymentConfirmation(
+                    title: 'Mohammad Nikmard',
                     buttonText: 'Send',
                     secondRowDescription: Row(
                       children: [

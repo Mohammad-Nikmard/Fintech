@@ -57,6 +57,7 @@ class _BillPaymentScreenState extends State<BillPaymentScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 80),
                   child: CustomPaymentConfirmation(
+                    title: 'Mohammad Nikmard',
                     buttonText: 'Pay Now',
                     secondRowDescription: const Row(
                       children: [

@@ -3,6 +3,7 @@ import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
 import 'package:fintech/widget/custom_amount_selection_box.dart';
 import 'package:fintech/widget/custom_appbar.dart';
+import 'package:fintech/widget/custom_payment_confirmation.dart';
 import 'package:fintech/widget/my_textfield.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,7 @@ class RechargeScreen extends StatefulWidget {
 class _RechargeScreenState extends State<RechargeScreen> {
   int progressIndicator = 0;
   String selectedAmount = '';
+  String selectedNetwork = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +35,11 @@ class _RechargeScreenState extends State<RechargeScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 80),
                   child: _RechargeSection(
+                    selectedNetwork: (value) {
+                      setState(() {
+                        selectedNetwork = value;
+                      });
+                    },
                     selectedAmount: (value) {
                       setState(() {
                         selectedAmount = value;
@@ -46,9 +53,96 @@ class _RechargeScreenState extends State<RechargeScreen> {
                     },
                   ),
                 ),
-              } else if (progressIndicator == 1)
-                ...{}
-              else if (progressIndicator == 2)
+              } else if (progressIndicator == 1) ...{
+                Padding(
+                  padding: const EdgeInsets.only(top: 80),
+                  child: CustomPaymentConfirmation(
+                    title: selectedNetwork,
+                    buttonText: 'Pay Now',
+                    secondRowDescription: Row(
+                      children: [
+                        const Text(
+                          'Transfer Fee',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.greyColor200,
+                          ),
+                        ),
+                        const Spacer(),
+                        RichText(
+                          text: const TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '\$',
+                                style: TextStyle(
+                                  fontFamily: 'SR',
+                                  fontSize: 18,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              TextSpan(
+                                text: '0.00',
+                                style: TextStyle(
+                                  fontFamily: 'SB',
+                                  fontSize: 18,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'USD',
+                                style: TextStyle(
+                                  fontFamily: 'SM',
+                                  fontSize: 10,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    firstRowDescription: Row(
+                      children: [
+                        const Text(
+                          'Network',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.greyColor200,
+                          ),
+                        ),
+                        const Spacer(),
+                        Text(
+                          selectedNetwork,
+                          style: const TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.blackColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    amount: selectedAmount.substring(1),
+                    paymentStatus: 'Pending',
+                    icon: const Positioned(
+                      top: -45,
+                      child: CircleAvatar(
+                        radius: 45,
+                        backgroundColor: Colors.black,
+                      ),
+                    ),
+                    text:
+                        'Please make sure that you want to Recharge tour mobile',
+                    mediaQuery: widget.mediaQuery,
+                    onTapped: () {
+                      setState(() {
+                        progressIndicator = 2;
+                      });
+                    },
+                  ),
+                )
+              } else if (progressIndicator == 2)
                 ...{},
               Padding(
                 padding: const EdgeInsets.only(top: 10),
@@ -74,10 +168,12 @@ class _RechargeSection extends StatefulWidget {
     required this.mediaQuery,
     required this.onTapped,
     required this.selectedAmount,
+    required this.selectedNetwork,
   });
   final MediaQueryHandler mediaQuery;
   final VoidCallback onTapped;
   final ValueChanged<String> selectedAmount;
+  final ValueChanged<String> selectedNetwork;
 
   @override
   State<_RechargeSection> createState() => _RechargeSectionState();
@@ -228,6 +324,7 @@ class _RechargeSectionState extends State<_RechargeSection> {
             width: widget.mediaQuery.screenWidth(context),
             child: ElevatedButton(
               onPressed: () {
+                widget.selectedNetwork(networkList[selectedIndex]);
                 widget.selectedAmount(selectedAmount);
                 widget.onTapped();
               },

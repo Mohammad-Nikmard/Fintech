@@ -50,6 +50,7 @@ class _NetflixPaymentScreenState extends State<NetflixPaymentScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 80),
                   child: CustomPaymentConfirmation(
+                    title: 'Netflix',
                     buttonText: 'Pay Now',
                     secondRowDescription: const Row(
                       children: [
