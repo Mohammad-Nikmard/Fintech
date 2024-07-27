@@ -3,6 +3,7 @@ import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
 import 'package:fintech/widget/custom_amount_selection_box.dart';
 import 'package:fintech/widget/custom_appbar.dart';
+import 'package:fintech/widget/custom_grid_box.dart';
 import 'package:fintech/widget/custom_payment_confirmation.dart';
 import 'package:fintech/widget/custom_payment_success.dart';
 import 'package:fintech/widget/custom_receipt_content.dart';
@@ -338,48 +339,27 @@ class _RechargeSectionState extends State<_RechargeSection> {
                       selectedIndex = index;
                     });
                   },
-                  child: Container(
+                  child: CustomGridBox(
                     height: 103,
                     width: 112,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                      color: Colors.white,
-                      border: Border.all(
-                        width: 1.5,
-                        color: (selectedIndex == index)
-                            ? AppColor.blueColor
-                            : Colors.transparent,
-                      ),
-                      boxShadow: const [
-                        BoxShadow(
-                          offset: Offset(0, -5),
-                          spreadRadius: -20,
-                          blurRadius: 25,
-                          color: AppColor.greyColor200,
+                    index: index,
+                    selectedIndex: selectedIndex,
+                    child: Column(
+                      children: [
+                        const CircleAvatar(
+                          radius: 26,
+                          backgroundColor: Colors.black,
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          networkList[index],
+                          style: const TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 13,
+                            color: AppColor.greyColor200,
+                          ),
                         ),
                       ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Column(
-                        children: [
-                          const CircleAvatar(
-                            radius: 26,
-                            backgroundColor: Colors.black,
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            networkList[index],
-                            style: const TextStyle(
-                              fontFamily: 'SM',
-                              fontSize: 13,
-                              color: AppColor.greyColor200,
-                            ),
-                          ),
-                        ],
-                      ),
                     ),
                   ),
                 ),
