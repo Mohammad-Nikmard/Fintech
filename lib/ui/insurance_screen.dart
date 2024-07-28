@@ -21,6 +21,7 @@ class _InsuranceScreenState extends State<InsuranceScreen> {
   int progressIndicator = 0;
   String insurance = '';
   String amount = '';
+  String plan = '';
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +71,11 @@ class _InsuranceScreenState extends State<InsuranceScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 80),
                   child: _InsuranceFields(
+                    selectedPlan: (value) {
+                      setState(() {
+                        plan = value;
+                      });
+                    },
                     mediaQuery: widget.mediaQuery,
                     selectedInsurance: insurance,
                     onTapped: () {
@@ -79,9 +85,22 @@ class _InsuranceScreenState extends State<InsuranceScreen> {
                     },
                   ),
                 ),
-              } else if (progressIndicator == 3)
-                ...{}
-              else if (progressIndicator == 4)
+              } else if (progressIndicator == 3) ...{
+                Padding(
+                  padding: const EdgeInsets.only(top: 80),
+                  child: _InsuranceDetails(
+                    mediaQuery: widget.mediaQuery,
+                    onTapped: () {
+                      setState(() {
+                        progressIndicator = 4;
+                      });
+                    },
+                    selectedAmount: amount,
+                    selectedPlan: plan,
+                    selectedInsurance: insurance,
+                  ),
+                ),
+              } else if (progressIndicator == 4)
                 ...{},
               Padding(
                 padding: const EdgeInsets.only(top: 10),
@@ -465,6 +484,7 @@ class _InsurancePlanSelectionState extends State<_InsurancePlanSelection> {
             width: widget.mediaQuery.screenWidth(context),
             child: ElevatedButton(
               onPressed: () {
+                widget.selectedAmount(priceList[selectedIndex]);
                 widget.onTapped();
               },
               child: const Text(
@@ -487,10 +507,12 @@ class _InsuranceFields extends StatefulWidget {
     required this.mediaQuery,
     required this.selectedInsurance,
     required this.onTapped,
+    required this.selectedPlan,
   });
   final MediaQueryHandler mediaQuery;
   final String selectedInsurance;
   final VoidCallback onTapped;
+  final ValueChanged<String> selectedPlan;
 
   @override
   State<_InsuranceFields> createState() => _InsuranceFieldsState();
@@ -607,7 +629,7 @@ class _InsuranceFieldsState extends State<_InsuranceFields> {
             width: widget.mediaQuery.screenWidth(context),
             child: CustomTextField(
               mediaQuery: widget.mediaQuery,
-              hint: 'Purpose if payment (Optional)',
+              hint: 'Purpose of payment (Optional)',
               controller: purposeOfPaymentController,
               color: context.secondaryContainer,
             ),
@@ -728,6 +750,7 @@ class _InsuranceFieldsState extends State<_InsuranceFields> {
             width: widget.mediaQuery.screenWidth(context),
             child: ElevatedButton(
               onPressed: () {
+                widget.selectedPlan(planList[selectedIndex]);
                 widget.onTapped();
               },
               child: const Text(
@@ -741,6 +764,219 @@ class _InsuranceFieldsState extends State<_InsuranceFields> {
           const SizedBox(height: 30),
         ],
       ),
+    );
+  }
+}
+
+class _InsuranceDetails extends StatelessWidget {
+  const _InsuranceDetails({
+    required this.mediaQuery,
+    required this.onTapped,
+    required this.selectedAmount,
+    required this.selectedPlan,
+    required this.selectedInsurance,
+  });
+  final MediaQueryHandler mediaQuery;
+  final String selectedInsurance;
+  final String selectedAmount;
+  final String selectedPlan;
+  final VoidCallback onTapped;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _AppBar(
+          title: selectedInsurance,
+          mediaQuery: mediaQuery,
+        ),
+        Text(
+          'Transfer Details',
+          style: context.headlineMedium,
+        ),
+        const SizedBox(height: 20),
+        ClipRRect(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(10),
+          ),
+          child: SizedBox(
+            height: 270,
+            width: mediaQuery.screenWidth(context),
+            child: ColoredBox(
+              color: context.secondaryContainer,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        const Text(
+                          'Transfer Amount',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.greyColor200,
+                          ),
+                        ),
+                        const Spacer(),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              const TextSpan(
+                                text: '\$',
+                                style: TextStyle(
+                                  fontFamily: 'SM',
+                                  fontSize: 18,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              TextSpan(
+                                text: selectedAmount,
+                                style: const TextStyle(
+                                  fontFamily: 'SB',
+                                  fontSize: 20,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              const TextSpan(
+                                text: 'USD',
+                                style: TextStyle(
+                                  fontFamily: 'SM',
+                                  fontSize: 10,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(
+                      thickness: 1.5,
+                      color: Color(0xffe5e7e9),
+                    ),
+                    Row(
+                      children: [
+                        const Text(
+                          'Insurance Plan',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.greyColor200,
+                          ),
+                        ),
+                        const Spacer(),
+                        Text(
+                          selectedPlan,
+                          style: const TextStyle(
+                            fontFamily: 'SSB',
+                            fontSize: 21,
+                            color: AppColor.blackColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(
+                      thickness: 1.5,
+                      color: Color(0xffe5e7e9),
+                    ),
+                    const Row(
+                      children: [
+                        Text(
+                          'Payment Policy',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.greyColor200,
+                          ),
+                        ),
+                        Spacer(),
+                        Text(
+                          'Quarterly',
+                          style: TextStyle(
+                            fontFamily: 'SSB',
+                            fontSize: 21,
+                            color: AppColor.blackColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(
+                      thickness: 1.5,
+                      color: Color(0xffe5e7e9),
+                    ),
+                    Row(
+                      children: [
+                        const Text(
+                          'Total',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.greyColor200,
+                          ),
+                        ),
+                        const Spacer(),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              const TextSpan(
+                                text: '\$',
+                                style: TextStyle(
+                                  fontFamily: 'SM',
+                                  fontSize: 18,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              TextSpan(
+                                text: selectedAmount,
+                                style: const TextStyle(
+                                  fontFamily: 'SB',
+                                  fontSize: 20,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              const TextSpan(
+                                text: 'USD',
+                                style: TextStyle(
+                                  fontFamily: 'SM',
+                                  fontSize: 10,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        const Spacer(),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 30),
+          child: SizedBox(
+            height: 63,
+            width: mediaQuery.screenWidth(context),
+            child: ElevatedButton(
+              onPressed: () {
+                onTapped();
+              },
+              child: const Text(
+                'Continue',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
