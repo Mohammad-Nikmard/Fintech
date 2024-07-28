@@ -2,6 +2,7 @@ import 'package:fintech/constatns/color_constants.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
 import 'package:fintech/widget/custom_appbar.dart';
+import 'package:fintech/widget/custom_payment_confirmation.dart';
 import 'package:fintech/widget/custom_selection_box.dart';
 import 'package:fintech/widget/my_textfield.dart';
 import 'package:flutter/material.dart';
@@ -100,7 +101,97 @@ class _InsuranceScreenState extends State<InsuranceScreen> {
                     selectedInsurance: insurance,
                   ),
                 ),
-              } else if (progressIndicator == 4)
+              } else if (progressIndicator == 4) ...{
+                Padding(
+                  padding: const EdgeInsets.only(top: 80),
+                  child: CustomPaymentConfirmation(
+                    title: insurance,
+                    buttonText: 'Send',
+                    secondRowDescription: Row(
+                      children: [
+                        const Text(
+                          'Transfer Fee',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.greyColor200,
+                          ),
+                        ),
+                        const Spacer(),
+                        RichText(
+                          text: const TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '\$',
+                                style: TextStyle(
+                                  fontFamily: 'SR',
+                                  fontSize: 18,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              TextSpan(
+                                text: '0.00',
+                                style: TextStyle(
+                                  fontFamily: 'SB',
+                                  fontSize: 20,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'USD',
+                                style: TextStyle(
+                                  fontFamily: 'SM',
+                                  fontSize: 10,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    firstRowDescription: const Row(
+                      children: [
+                        Text(
+                          'Card Type',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.greyColor200,
+                          ),
+                        ),
+                        Spacer(),
+                        Text(
+                          'Debit Card',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.blackColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    amount: amount,
+                    paymentStatus: 'Pending',
+                    icon: Positioned(
+                      top: -45,
+                      child: CircleAvatar(
+                        radius: 45,
+                        backgroundImage:
+                            AssetImage('assets/images/$insurance.png'),
+                      ),
+                    ),
+                    text:
+                        'We care about your privacy, please make sure that you want to transfer money.',
+                    mediaQuery: widget.mediaQuery,
+                    onTapped: () {
+                      setState(() {
+                        progressIndicator = 5;
+                      });
+                    },
+                  ),
+                )
+              } else if (progressIndicator == 5)
                 ...{},
               Padding(
                 padding: const EdgeInsets.only(top: 10),
