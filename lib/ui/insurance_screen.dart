@@ -3,6 +3,8 @@ import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/custom_payment_confirmation.dart';
+import 'package:fintech/widget/custom_payment_success.dart';
+import 'package:fintech/widget/custom_receipt_content.dart';
 import 'package:fintech/widget/custom_selection_box.dart';
 import 'package:fintech/widget/my_textfield.dart';
 import 'package:flutter/material.dart';
@@ -191,8 +193,104 @@ class _InsuranceScreenState extends State<InsuranceScreen> {
                     },
                   ),
                 )
-              } else if (progressIndicator == 5)
-                ...{},
+              } else if (progressIndicator == 5) ...{
+                Padding(
+                  padding: const EdgeInsets.only(top: 80),
+                  child: CustomPaymentSuccessful(
+                    title: 'Transfer Successful',
+                    receipt: CustomReceiptContent(
+                      subtitle: '*******4183',
+                      icon: Positioned(
+                        top: -30,
+                        child: Container(
+                          height: 75,
+                          width: 75,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                            border: Border.all(
+                              width: 2,
+                              color: Colors.white,
+                            ),
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage('assets/images/$insurance.png'),
+                            ),
+                          ),
+                        ),
+                      ),
+                      title: insurance,
+                      amount: amount,
+                      firstRowContent: const Row(
+                        children: [
+                          Text(
+                            'Card Type',
+                            style: TextStyle(
+                              fontFamily: 'SM',
+                              fontSize: 18,
+                              color: AppColor.greyColor200,
+                            ),
+                          ),
+                          Spacer(),
+                          Text(
+                            'Debit Card',
+                            style: TextStyle(
+                              fontFamily: 'SM',
+                              fontSize: 18,
+                              color: AppColor.blackColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                      secondRowContent: Row(
+                        children: [
+                          const Text(
+                            'Transfer Fee',
+                            style: TextStyle(
+                              fontFamily: 'SM',
+                              fontSize: 18,
+                              color: AppColor.greyColor200,
+                            ),
+                          ),
+                          const Spacer(),
+                          RichText(
+                            text: const TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: '\$',
+                                  style: TextStyle(
+                                    fontFamily: 'SR',
+                                    fontSize: 18,
+                                    color: AppColor.blackColor,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: '0.00',
+                                  style: TextStyle(
+                                    fontFamily: 'SB',
+                                    fontSize: 18,
+                                    color: AppColor.blackColor,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: 'USD',
+                                  style: TextStyle(
+                                    fontFamily: 'SM',
+                                    fontSize: 10,
+                                    color: AppColor.blackColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    text: 'Your money has been transferred successfully',
+                    mediaQuery: widget.mediaQuery,
+                  ),
+                ),
+              },
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: CustomAppbar(
