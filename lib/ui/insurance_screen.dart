@@ -3,6 +3,7 @@ import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/custom_selection_box.dart';
+import 'package:fintech/widget/my_textfield.dart';
 import 'package:flutter/material.dart';
 
 class InsuranceScreen extends StatefulWidget {
@@ -65,9 +66,20 @@ class _InsuranceScreenState extends State<InsuranceScreen> {
                     selectedInsurance: insurance,
                   ),
                 ),
-              } else if (progressIndicator == 2)
-                ...{}
-              else if (progressIndicator == 3)
+              } else if (progressIndicator == 2) ...{
+                Padding(
+                  padding: const EdgeInsets.only(top: 80),
+                  child: _InsuranceFields(
+                    mediaQuery: widget.mediaQuery,
+                    selectedInsurance: insurance,
+                    onTapped: () {
+                      setState(() {
+                        progressIndicator = 3;
+                      });
+                    },
+                  ),
+                ),
+              } else if (progressIndicator == 3)
                 ...{}
               else if (progressIndicator == 4)
                 ...{},
@@ -253,6 +265,85 @@ class _InsuranceListState extends State<_InsuranceList> {
   }
 }
 
+class _AppBar extends StatelessWidget {
+  const _AppBar({
+    required this.title,
+    required this.mediaQuery,
+  });
+  final String title;
+  final MediaQueryHandler mediaQuery;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 35),
+      child: Container(
+        width: mediaQuery.screenWidth(context),
+        height: 239,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+          boxShadow: [
+            BoxShadow(
+              offset: Offset(0, 0),
+              spreadRadius: -18,
+              blurRadius: 25,
+              color: AppColor.greyColor200,
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+              child: SizedBox(
+                height: 155,
+                width: double.infinity,
+                child: FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Image.asset(
+                    'assets/images/$title.png',
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 10),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontFamily: 'SSB',
+                      fontSize: 20,
+                      color: AppColor.blackColor,
+                    ),
+                  ),
+                  const Text(
+                    'Family plan cover two or more membeers.',
+                    style: TextStyle(
+                      fontFamily: 'SR',
+                      fontSize: 15,
+                      color: AppColor.greyColor200,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _InsurancePlanSelection extends StatefulWidget {
   const _InsurancePlanSelection({
     required this.mediaQuery,
@@ -285,71 +376,9 @@ class _InsurancePlanSelectionState extends State<_InsurancePlanSelection> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 35),
-            child: Container(
-              width: widget.mediaQuery.screenWidth(context),
-              height: 239,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0, 0),
-                    spreadRadius: -18,
-                    blurRadius: 25,
-                    color: AppColor.greyColor200,
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    ),
-                    child: SizedBox(
-                      height: 155,
-                      width: double.infinity,
-                      child: FittedBox(
-                        fit: BoxFit.fitWidth,
-                        child: Image.asset(
-                          'assets/images/${widget.selectedInsurance}.png',
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 10),
-                        Text(
-                          widget.selectedInsurance,
-                          style: const TextStyle(
-                            fontFamily: 'SSB',
-                            fontSize: 20,
-                            color: AppColor.blackColor,
-                          ),
-                        ),
-                        const Text(
-                          'Family plan cover two or more membeers.',
-                          style: TextStyle(
-                            fontFamily: 'SR',
-                            fontSize: 15,
-                            color: AppColor.greyColor200,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          _AppBar(
+            title: widget.selectedInsurance,
+            mediaQuery: widget.mediaQuery,
           ),
           Text(
             'Select a Insurance Plan',
@@ -428,6 +457,269 @@ class _InsurancePlanSelectionState extends State<_InsurancePlanSelection> {
                 );
               },
               itemCount: priceList.length,
+            ),
+          ),
+          const SizedBox(height: 30),
+          SizedBox(
+            height: 63,
+            width: widget.mediaQuery.screenWidth(context),
+            child: ElevatedButton(
+              onPressed: () {
+                widget.onTapped();
+              },
+              child: const Text(
+                'Continue',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 30),
+        ],
+      ),
+    );
+  }
+}
+
+class _InsuranceFields extends StatefulWidget {
+  const _InsuranceFields({
+    required this.mediaQuery,
+    required this.selectedInsurance,
+    required this.onTapped,
+  });
+  final MediaQueryHandler mediaQuery;
+  final String selectedInsurance;
+  final VoidCallback onTapped;
+
+  @override
+  State<_InsuranceFields> createState() => _InsuranceFieldsState();
+}
+
+class _InsuranceFieldsState extends State<_InsuranceFields> {
+  late TextEditingController firstNameController;
+  late TextEditingController lastNameController;
+  late TextEditingController familyMemberController;
+  late TextEditingController paymentDateController;
+  late TextEditingController purposeOfPaymentController;
+  late TextEditingController cardHolderController;
+  late TextEditingController cardNumberController;
+  late TextEditingController dateController;
+  late TextEditingController cvvController;
+
+  int selectedIndex = 0;
+
+  List<String> planList = [
+    'Monthly',
+    'Quarterly',
+    'Yearly',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    firstNameController = TextEditingController();
+    lastNameController = TextEditingController();
+    familyMemberController = TextEditingController();
+    paymentDateController = TextEditingController();
+    purposeOfPaymentController = TextEditingController();
+    cardHolderController = TextEditingController();
+    cardNumberController = TextEditingController();
+    dateController = TextEditingController();
+    cvvController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    familyMemberController.dispose();
+    paymentDateController.dispose();
+    purposeOfPaymentController.dispose();
+    cardHolderController.dispose();
+    cardNumberController.dispose();
+    dateController.dispose();
+    cvvController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _AppBar(
+            title: widget.selectedInsurance,
+            mediaQuery: widget.mediaQuery,
+          ),
+          Text(
+            'Add Information',
+            style: context.headlineMedium,
+          ),
+          const SizedBox(height: 20),
+          SizedBox(
+            height: 60,
+            width: widget.mediaQuery.screenWidth(context),
+            child: CustomTextField(
+              mediaQuery: widget.mediaQuery,
+              hint: 'First Name',
+              controller: firstNameController,
+              color: context.secondaryContainer,
+            ),
+          ),
+          const SizedBox(height: 5),
+          SizedBox(
+            height: 60,
+            width: widget.mediaQuery.screenWidth(context),
+            child: CustomTextField(
+              mediaQuery: widget.mediaQuery,
+              hint: 'Last Name',
+              controller: lastNameController,
+              color: context.secondaryContainer,
+            ),
+          ),
+          const SizedBox(height: 5),
+          SizedBox(
+            height: 60,
+            width: widget.mediaQuery.screenWidth(context),
+            child: CustomTextField(
+              mediaQuery: widget.mediaQuery,
+              hint: 'Total family Members',
+              controller: familyMemberController,
+              color: context.secondaryContainer,
+            ),
+          ),
+          const SizedBox(height: 5),
+          SizedBox(
+            height: 60,
+            width: widget.mediaQuery.screenWidth(context),
+            child: CustomTextField(
+              mediaQuery: widget.mediaQuery,
+              hint: 'Payment Date',
+              controller: paymentDateController,
+              color: context.secondaryContainer,
+            ),
+          ),
+          const SizedBox(height: 5),
+          SizedBox(
+            height: 60,
+            width: widget.mediaQuery.screenWidth(context),
+            child: CustomTextField(
+              mediaQuery: widget.mediaQuery,
+              hint: 'Purpose if payment (Optional)',
+              controller: purposeOfPaymentController,
+              color: context.secondaryContainer,
+            ),
+          ),
+          const SizedBox(height: 30),
+          Text(
+            'Add Acount Details',
+            style: context.headlineMedium,
+          ),
+          const SizedBox(height: 20),
+          SizedBox(
+            height: 60,
+            width: widget.mediaQuery.screenWidth(context),
+            child: CustomTextField(
+              mediaQuery: widget.mediaQuery,
+              hint: 'Card Holder Name',
+              controller: cardHolderController,
+              color: context.secondaryContainer,
+            ),
+          ),
+          const SizedBox(height: 5),
+          SizedBox(
+            height: 60,
+            width: widget.mediaQuery.screenWidth(context),
+            child: CustomTextField(
+              mediaQuery: widget.mediaQuery,
+              hint: 'Card Number',
+              controller: cardNumberController,
+              color: context.secondaryContainer,
+            ),
+          ),
+          const SizedBox(height: 5),
+          Row(
+            children: [
+              Expanded(
+                child: SizedBox(
+                  height: 60,
+                  child: CustomTextField(
+                    mediaQuery: widget.mediaQuery,
+                    hint: 'MM/YY',
+                    controller: dateController,
+                    color: context.secondaryContainer,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: SizedBox(
+                  height: 60,
+                  width: widget.mediaQuery.screenWidth(context),
+                  child: CustomTextField(
+                    mediaQuery: widget.mediaQuery,
+                    hint: 'CVV',
+                    controller: cvvController,
+                    color: context.secondaryContainer,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          Text(
+            'Payment Plan',
+            style: context.headlineMedium,
+          ),
+          const SizedBox(height: 20),
+          SizedBox(
+            height: 48,
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedIndex = index;
+                    });
+                  },
+                  child: Container(
+                    height: 48,
+                    width: 114,
+                    margin: const EdgeInsets.only(right: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(7),
+                      ),
+                      color: (selectedIndex == index)
+                          ? Colors.transparent
+                          : context.secondaryContainer,
+                      border: Border.all(
+                        width: 1.5,
+                        color: (selectedIndex == index)
+                            ? AppColor.blueColor
+                            : Colors.transparent,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        planList[index],
+                        style: TextStyle(
+                          fontFamily: 'SM',
+                          fontSize: 17,
+                          color: (selectedIndex == index)
+                              ? AppColor.blueColor
+                              : AppColor.greyColor400,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+              itemCount: planList.length,
             ),
           ),
           const SizedBox(height: 30),
