@@ -1,6 +1,6 @@
 import 'package:fintech/DI/service_locator.dart';
 import 'package:fintech/theme/light_theme.dart';
-import 'package:fintech/ui/insurance_screen.dart';
+import 'package:fintech/ui/send_gift_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: InsuranceScreen(
+      home: SendGiftScreen(
         mediaQuery: locator.get(),
       ),
       theme: lightTheme,
