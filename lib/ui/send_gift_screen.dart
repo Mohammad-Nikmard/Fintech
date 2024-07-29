@@ -5,6 +5,7 @@ import 'package:fintech/util/mediaquery_handler.dart';
 import 'package:fintech/widget/custom_amount_selection_box.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/custom_box.dart';
+import 'package:fintech/widget/custom_payment_confirmation.dart';
 import 'package:fintech/widget/my_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -82,6 +83,96 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                     },
                   ),
                 ),
+              } else if (progressIndicator == 3) ...{
+                Padding(
+                  padding: const EdgeInsets.only(top: 80),
+                  child: CustomPaymentConfirmation(
+                    title: 'Mohammad Nikmard',
+                    buttonText: 'Send',
+                    secondRowDescription: Row(
+                      children: [
+                        const Text(
+                          'Transfer Fee',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.greyColor200,
+                          ),
+                        ),
+                        const Spacer(),
+                        RichText(
+                          text: const TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '\$',
+                                style: TextStyle(
+                                  fontFamily: 'SR',
+                                  fontSize: 18,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              TextSpan(
+                                text: '0.00',
+                                style: TextStyle(
+                                  fontFamily: 'SB',
+                                  fontSize: 20,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'USD',
+                                style: TextStyle(
+                                  fontFamily: 'SM',
+                                  fontSize: 10,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    firstRowDescription: const Row(
+                      children: [
+                        Text(
+                          'Card Type',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.greyColor200,
+                          ),
+                        ),
+                        Spacer(),
+                        Text(
+                          'Debit Card',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.blackColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    amount: amount.substring(1),
+                    paymentStatus: 'Pending',
+                    icon: const Positioned(
+                      top: -45,
+                      child: CircleAvatar(
+                        radius: 45,
+                        backgroundImage:
+                            AssetImage('assets/images/my_photo.jpg'),
+                      ),
+                    ),
+                    text:
+                        'We care about your privacy, please make sure that you want to transfer money.',
+                    mediaQuery: widget.mediaQuery,
+                    onTapped: () {
+                      setState(() {
+                        progressIndicator = 5;
+                      });
+                    },
+                  ),
+                )
               },
               Padding(
                 padding: const EdgeInsets.only(top: 10),
