@@ -5,6 +5,7 @@ import 'package:fintech/util/mediaquery_handler.dart';
 import 'package:fintech/widget/custom_amount_input.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/custom_box.dart';
+import 'package:fintech/widget/custom_payment_confirmation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -75,6 +76,96 @@ class _DonationScreenState extends State<DonationScreen> {
                     selectedOwner: donationOwner,
                   ),
                 ),
+              } else if (progressIndicator == 2) ...{
+                Padding(
+                  padding: const EdgeInsets.only(top: 80),
+                  child: CustomPaymentConfirmation(
+                    title: donationOwner,
+                    buttonText: 'Send Money',
+                    secondRowDescription: Row(
+                      children: [
+                        const Text(
+                          'Transfer Fee',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.greyColor200,
+                          ),
+                        ),
+                        const Spacer(),
+                        RichText(
+                          text: const TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '\$',
+                                style: TextStyle(
+                                  fontFamily: 'SR',
+                                  fontSize: 18,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              TextSpan(
+                                text: '0.00',
+                                style: TextStyle(
+                                  fontFamily: 'SB',
+                                  fontSize: 18,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'USD',
+                                style: TextStyle(
+                                  fontFamily: 'SM',
+                                  fontSize: 10,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    firstRowDescription: const Row(
+                      children: [
+                        Text(
+                          'Account Type',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.greyColor200,
+                          ),
+                        ),
+                        Spacer(),
+                        Text(
+                          'Current Account',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.blackColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    amount: amount.substring(1),
+                    paymentStatus: 'Pending',
+                    icon: Positioned(
+                      top: -45,
+                      child: CircleAvatar(
+                        radius: 45,
+                        backgroundImage: AssetImage(
+                            'assets/images/${donation.substring(11)}.png'),
+                      ),
+                    ),
+                    text:
+                        'We care about your privacy, please make sure that you want to donate money.',
+                    mediaQuery: widget.mediaQuery,
+                    onTapped: () {
+                      setState(() {
+                        progressIndicator = 3;
+                      });
+                    },
+                  ),
+                )
               },
               Padding(
                 padding: const EdgeInsets.only(top: 10),
@@ -337,7 +428,8 @@ class _CharityListState extends State<_CharityList> {
                                 const Spacer(),
                                 ClipRRect(
                                   borderRadius: const BorderRadius.all(
-                                      Radius.circular(10)),
+                                    Radius.circular(7),
+                                  ),
                                   child: GestureDetector(
                                     onTap: () {
                                       widget.dontationOwner(ownerList[index]);

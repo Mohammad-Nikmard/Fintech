@@ -177,7 +177,7 @@ class _CustomAmountInputSheetState extends State<CustomAmountInputSheet> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    widget.eneterdAmount(amountController.text);
+                    widget.eneterdAmount('${amountController.text}.00');
                     Navigator.pop(context);
                     widget.onTapped();
                   },
