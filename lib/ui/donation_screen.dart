@@ -6,6 +6,8 @@ import 'package:fintech/widget/custom_amount_input.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/custom_box.dart';
 import 'package:fintech/widget/custom_payment_confirmation.dart';
+import 'package:fintech/widget/custom_payment_success.dart';
+import 'package:fintech/widget/custom_receipt_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -166,6 +168,92 @@ class _DonationScreenState extends State<DonationScreen> {
                     },
                   ),
                 )
+              } else if (progressIndicator == 3) ...{
+                Padding(
+                  padding: const EdgeInsets.only(top: 80),
+                  child: CustomPaymentSuccessful(
+                    title: 'Transfer Successful',
+                    receipt: CustomReceiptContent(
+                      subtitle: '*******4183',
+                      icon: Positioned(
+                        top: -45,
+                        child: CircleAvatar(
+                          radius: 45,
+                          backgroundImage: AssetImage(
+                              'assets/images/${donation.substring(11)}.png'),
+                        ),
+                      ),
+                      title: donationOwner,
+                      amount: amount.substring(1),
+                      firstRowContent: const Row(
+                        children: [
+                          Text(
+                            'Account Type',
+                            style: TextStyle(
+                              fontFamily: 'SM',
+                              fontSize: 18,
+                              color: AppColor.greyColor200,
+                            ),
+                          ),
+                          Spacer(),
+                          Text(
+                            'Current Account',
+                            style: TextStyle(
+                              fontFamily: 'SM',
+                              fontSize: 18,
+                              color: AppColor.blackColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                      secondRowContent: Row(
+                        children: [
+                          const Text(
+                            'Transfer Fee',
+                            style: TextStyle(
+                              fontFamily: 'SM',
+                              fontSize: 18,
+                              color: AppColor.greyColor200,
+                            ),
+                          ),
+                          const Spacer(),
+                          RichText(
+                            text: const TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: '\$',
+                                  style: TextStyle(
+                                    fontFamily: 'SR',
+                                    fontSize: 18,
+                                    color: AppColor.blackColor,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: '0.00',
+                                  style: TextStyle(
+                                    fontFamily: 'SB',
+                                    fontSize: 18,
+                                    color: AppColor.blackColor,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: 'USD',
+                                  style: TextStyle(
+                                    fontFamily: 'SM',
+                                    fontSize: 10,
+                                    color: AppColor.blackColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    text: 'Your donation has been transferred successfully',
+                    mediaQuery: widget.mediaQuery,
+                  ),
+                ),
               },
               Padding(
                 padding: const EdgeInsets.only(top: 10),
