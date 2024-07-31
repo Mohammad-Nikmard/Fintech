@@ -2,7 +2,9 @@ import 'package:fintech/constatns/color_constants.dart';
 import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
+import 'package:fintech/widget/custom_amount_input.dart';
 import 'package:fintech/widget/custom_appbar.dart';
+import 'package:fintech/widget/custom_box.dart';
 import 'package:fintech/widget/custom_grid_box.dart';
 import 'package:fintech/widget/my_textfield.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +39,11 @@ class _MoneyTransferScreenState extends State<MoneyTransferScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 80),
                   child: _MoneyTransferFields(
+                    enteredAmount: (value) {
+                      setState(() {
+                        amount = value;
+                      });
+                    },
                     mediaQuery: widget.mediaQuery,
                     onTapped: () {
                       setState(() {
@@ -46,6 +53,19 @@ class _MoneyTransferScreenState extends State<MoneyTransferScreen> {
                     selectedUsser: (value) {
                       setState(() {
                         chosenUser = value;
+                      });
+                    },
+                  ),
+                ),
+              } else if (progressIndicator == 1) ...{
+                Padding(
+                  padding: const EdgeInsets.only(top: 80),
+                  child: _TransferDetail(
+                    mediaQuery: widget.mediaQuery,
+                    selectedAmount: amount,
+                    onTapped: () {
+                      setState(() {
+                        progressIndicator = 2;
                       });
                     },
                   ),
@@ -77,10 +97,12 @@ class _MoneyTransferFields extends StatefulWidget {
     required this.mediaQuery,
     required this.onTapped,
     required this.selectedUsser,
+    required this.enteredAmount,
   });
   final VoidCallback onTapped;
   final ValueChanged<String> selectedUsser;
   final MediaQueryHandler mediaQuery;
+  final ValueChanged<String> enteredAmount;
 
   @override
   State<_MoneyTransferFields> createState() => __MoneyTransferFieldsState();
@@ -376,8 +398,24 @@ class __MoneyTransferFieldsState extends State<_MoneyTransferFields> {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
-                widget.selectedUsser('');
-                widget.onTapped();
+                // widget.selectedUsser('');
+
+                showModalBottomSheet(
+                  isScrollControlled: true,
+                  context: context,
+                  builder: (context) {
+                    return CustomAmountInputSheet(
+                      mediaQuery: widget.mediaQuery,
+                      eneterdAmount: (value) {
+                        widget.enteredAmount(value);
+                      },
+                      onTapped: () {
+                        // Navigator.pop(context);
+                        widget.onTapped();
+                      },
+                    );
+                  },
+                );
               },
               child: const Text(
                 'Continue',
@@ -390,6 +428,348 @@ class __MoneyTransferFieldsState extends State<_MoneyTransferFields> {
           const SizedBox(height: 30),
         ],
       ),
+    );
+  }
+}
+
+class _TransferDetail extends StatelessWidget {
+  const _TransferDetail({
+    required this.mediaQuery,
+    required this.selectedAmount,
+    required this.onTapped,
+  });
+  final MediaQueryHandler mediaQuery;
+  final String selectedAmount;
+  final VoidCallback onTapped;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Recipient',
+          style: context.headlineMedium,
+        ),
+        const SizedBox(height: 15),
+        Container(
+          height: 81,
+          width: mediaQuery.screenWidth(context),
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(
+              Radius.circular(14),
+            ),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(0, -1),
+                spreadRadius: -24,
+                blurRadius: 25,
+                color: AppColor.greyColor200,
+              ),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                const CircleAvatar(
+                  radius: 30,
+                  backgroundImage: AssetImage('assets/images/my_photo.jpg'),
+                ),
+                const SizedBox(width: 15),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Mohammad',
+                      style: context.headlineMedium,
+                    ),
+                    const Text(
+                      '*******4183',
+                      style: TextStyle(
+                        fontFamily: 'SSB',
+                        fontSize: 16,
+                        color: AppColor.greyColor200,
+                      ),
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: SvgPicture.asset(
+                        'icon_edit'.toSvg,
+                        height: 16,
+                        width: 16,
+                        colorFilter: const ColorFilter.mode(
+                          AppColor.greyColor400,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 30),
+        Text(
+          'Card',
+          style: context.headlineMedium,
+        ),
+        const SizedBox(height: 15),
+        CustomBox(
+          height: 81,
+          mediaQuery: mediaQuery,
+          child: Row(
+            children: [
+              SvgPicture.asset(
+                'small_debitcard_vector'.toSvg,
+              ),
+              const SizedBox(width: 15),
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Spacer(),
+                  Text(
+                    'Debit Card',
+                    style: TextStyle(
+                      fontFamily: 'SSB',
+                      fontSize: 18,
+                      color: AppColor.blackColor,
+                    ),
+                  ),
+                  Text(
+                    'Master Card',
+                    style: TextStyle(
+                      fontFamily: 'SSB',
+                      fontSize: 16,
+                      color: AppColor.greyColor200,
+                    ),
+                  ),
+                  Spacer(),
+                ],
+              ),
+              const Spacer(),
+              Container(
+                height: 21,
+                width: 21,
+                decoration: ShapeDecoration(
+                  color: AppColor.blueLight,
+                  shape: const ContinuousRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(16),
+                    ),
+                  ),
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: RotatedBox(
+                      quarterTurns: 90,
+                      child: SvgPicture.asset(
+                        'icon_arrow_left'.toSvg,
+                        colorFilter: const ColorFilter.mode(
+                          AppColor.blueColor,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 30),
+        Text(
+          'Transfer Details',
+          style: context.headlineMedium,
+        ),
+        const SizedBox(height: 15),
+        ClipRRect(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(10),
+          ),
+          child: SizedBox(
+            height: 201,
+            width: mediaQuery.screenWidth(context),
+            child: ColoredBox(
+              color: context.secondaryContainer,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        const Text(
+                          'Transfer Amount',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.greyColor200,
+                          ),
+                        ),
+                        const Spacer(),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              const TextSpan(
+                                text: '\$',
+                                style: TextStyle(
+                                  fontFamily: 'SM',
+                                  fontSize: 18,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              TextSpan(
+                                text: selectedAmount.substring(1),
+                                style: const TextStyle(
+                                  fontFamily: 'SB',
+                                  fontSize: 20,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              const TextSpan(
+                                text: 'USD',
+                                style: TextStyle(
+                                  fontFamily: 'SM',
+                                  fontSize: 10,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(
+                      thickness: 1.5,
+                      color: Color(0xffe5e7e9),
+                    ),
+                    Row(
+                      children: [
+                        const Text(
+                          'Transfer Fee',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.greyColor200,
+                          ),
+                        ),
+                        const Spacer(),
+                        RichText(
+                          text: const TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '\$',
+                                style: TextStyle(
+                                  fontFamily: 'SM',
+                                  fontSize: 18,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              TextSpan(
+                                text: '0.00',
+                                style: TextStyle(
+                                  fontFamily: 'SB',
+                                  fontSize: 20,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'USD',
+                                style: TextStyle(
+                                  fontFamily: 'SM',
+                                  fontSize: 10,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(
+                      thickness: 1.5,
+                      color: Color(0xffe5e7e9),
+                    ),
+                    Row(
+                      children: [
+                        const Text(
+                          'Total',
+                          style: TextStyle(
+                            fontFamily: 'SM',
+                            fontSize: 18,
+                            color: AppColor.greyColor200,
+                          ),
+                        ),
+                        const Spacer(),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              const TextSpan(
+                                text: '\$',
+                                style: TextStyle(
+                                  fontFamily: 'SM',
+                                  fontSize: 18,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              TextSpan(
+                                text: selectedAmount.substring(1),
+                                style: const TextStyle(
+                                  fontFamily: 'SB',
+                                  fontSize: 20,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              const TextSpan(
+                                text: 'USD',
+                                style: TextStyle(
+                                  fontFamily: 'SM',
+                                  fontSize: 10,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        const Spacer(),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 30),
+          child: SizedBox(
+            height: 63,
+            width: mediaQuery.screenWidth(context),
+            child: ElevatedButton(
+              onPressed: () {
+                onTapped();
+              },
+              child: const Text(
+                'Continue',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
