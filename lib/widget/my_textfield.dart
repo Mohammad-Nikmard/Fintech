@@ -14,6 +14,7 @@ class CustomTextField extends StatelessWidget {
     this.textColor = AppColor.blackColor,
     this.prefixIcon,
     this.maxLines,
+    this.verticalPadding,
   });
   final MediaQueryHandler mediaQuery;
   final String hint;
@@ -24,6 +25,7 @@ class CustomTextField extends StatelessWidget {
   final Color textColor;
   final Widget? prefixIcon;
   final int? maxLines;
+  final double? verticalPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +43,8 @@ class CustomTextField extends StatelessWidget {
         ),
         decoration: InputDecoration(
           prefixIcon: prefixIcon,
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 23, vertical: 22),
+          contentPadding: EdgeInsets.symmetric(
+              horizontal: 23, vertical: verticalPadding ?? 22),
           filled: true,
           fillColor: color,
           hintText: hint,
