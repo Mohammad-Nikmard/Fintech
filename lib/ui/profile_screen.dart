@@ -1,7 +1,9 @@
 import 'package:fintech/constatns/color_constants.dart';
+import 'package:fintech/ui/manage_profile_screen.dart';
 import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
+import 'package:fintech/util/navigator.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/custom_box.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +13,10 @@ class ProfileScreen extends StatelessWidget {
   const ProfileScreen({
     super.key,
     required this.mediaQuery,
+    required this.nav,
   });
   final MediaQueryHandler mediaQuery;
+  final NavigatorHandler nav;
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +29,14 @@ class ProfileScreen extends StatelessWidget {
             children: [
               CustomScrollView(
                 slivers: [
-                  const SliverToBoxAdapter(
+                  SliverToBoxAdapter(
                     child: Center(
                       child: Padding(
-                        padding: EdgeInsets.only(bottom: 25),
-                        child: _ProfileHeader(),
+                        padding: const EdgeInsets.only(bottom: 25),
+                        child: _ProfileHeader(
+                          navigator: nav,
+                          mediaQuery: mediaQuery,
+                        ),
                       ),
                     ),
                   ),
@@ -96,9 +103,11 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 10),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
                 child: CustomAppbar(
+                  nav: nav,
+                  mediaQuery: mediaQuery,
                   title: 'Profile',
                   leftIcon: 'icon_arrow_left',
                   rightIcon: 'icon_notification',
@@ -113,41 +122,52 @@ class ProfileScreen extends StatelessWidget {
 }
 
 class _ProfileHeader extends StatelessWidget {
-  const _ProfileHeader();
+  const _ProfileHeader({
+    required this.mediaQuery,
+    required this.navigator,
+  });
+  final MediaQueryHandler mediaQuery;
+  final NavigatorHandler navigator;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         const SizedBox(height: 60),
-        Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Container(
-              height: 91,
-              width: 91,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage('assets/images/my_photo.jpg'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 5,
-              right: -2,
-              child: Container(
-                height: 21,
-                width: 21,
-                decoration: BoxDecoration(
+        GestureDetector(
+          onTap: () => navigator.fadeNav(
+            context,
+            ManageProfileScreen(mediaQuery: mediaQuery, nav: navigator),
+          ),
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Container(
+                height: 91,
+                width: 91,
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColor.blueColor,
-                  border: Border.all(width: 1.3, color: Colors.white),
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/my_photo.jpg'),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-          ],
+              Positioned(
+                bottom: 5,
+                right: -2,
+                child: Container(
+                  height: 21,
+                  width: 21,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColor.blueColor,
+                    border: Border.all(width: 1.3, color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 7),
         const Text(

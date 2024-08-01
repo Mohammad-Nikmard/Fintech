@@ -2,6 +2,7 @@ import 'package:fintech/constatns/color_constants.dart';
 import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
+import 'package:fintech/util/navigator.dart';
 import 'package:fintech/widget/custom_amount_selection_box.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/custom_box.dart';
@@ -16,8 +17,10 @@ class SendGiftScreen extends StatefulWidget {
   const SendGiftScreen({
     super.key,
     required this.mediaQuery,
+    required this.nav,
   });
   final MediaQueryHandler mediaQuery;
+  final NavigatorHandler nav;
 
   @override
   State<SendGiftScreen> createState() => _SendGiftScreenState();
@@ -276,6 +279,8 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: CustomAppbar(
+                  nav: widget.nav,
+                  mediaQuery: widget.mediaQuery,
                   title: (progressIndicator < 1) ? 'Gift' : 'Confirmation',
                   leftIcon: (progressIndicator > 3)
                       ? 'my_photo.jpg'

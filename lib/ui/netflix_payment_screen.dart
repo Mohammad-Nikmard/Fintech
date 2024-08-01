@@ -2,6 +2,7 @@ import 'package:fintech/constatns/color_constants.dart';
 import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
+import 'package:fintech/util/navigator.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/custom_box.dart';
 import 'package:fintech/widget/custom_payment_confirmation.dart';
@@ -15,8 +16,10 @@ class NetflixPaymentScreen extends StatefulWidget {
   const NetflixPaymentScreen({
     super.key,
     required this.mediaQuery,
+    required this.nav,
   });
   final MediaQueryHandler mediaQuery;
+  final NavigatorHandler nav;
 
   @override
   State<NetflixPaymentScreen> createState() => _NetflixPaymentScreenState();
@@ -239,6 +242,8 @@ class _NetflixPaymentScreenState extends State<NetflixPaymentScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: CustomAppbar(
+                  nav: widget.nav,
+                  mediaQuery: widget.mediaQuery,
                   title: topicConditions(),
                   leftIcon: (progressIndicator > 1)
                       ? 'my_photo.jpg'

@@ -16,12 +16,15 @@ dependencies:
   flutter_switch: ^0.3.2
   pinput: ^5.0.0
   smooth_page_indicator: ^1.2.0+3
+  page_transition: ^2.1.0
+  
 
   cupertino_icons: ^1.0.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  
 
   flutter_lints: ^3.0.0
 
@@ -31,7 +34,6 @@ flutter:
 
   assets:
     - assets/images/
-  #   - images/a_dot_ham.jpeg
 
   fonts:
     - family: SM

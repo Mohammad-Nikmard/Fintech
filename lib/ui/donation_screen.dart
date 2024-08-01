@@ -2,6 +2,7 @@ import 'package:fintech/constatns/color_constants.dart';
 import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
+import 'package:fintech/util/navigator.dart';
 import 'package:fintech/widget/custom_amount_input.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/custom_box.dart';
@@ -15,8 +16,10 @@ class DonationScreen extends StatefulWidget {
   const DonationScreen({
     super.key,
     required this.mediaQuery,
+    required this.nav,
   });
   final MediaQueryHandler mediaQuery;
+  final NavigatorHandler nav;
 
   @override
   State<DonationScreen> createState() => _DonationScreenState();
@@ -258,6 +261,8 @@ class _DonationScreenState extends State<DonationScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: CustomAppbar(
+                  nav: widget.nav,
+                  mediaQuery: widget.mediaQuery,
                   title: titleConditions(),
                   leftIcon: (progressIndicator > 2)
                       ? 'my_photo.jpg'

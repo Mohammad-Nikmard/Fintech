@@ -1,6 +1,7 @@
 import 'package:fintech/constatns/color_constants.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
+import 'package:fintech/util/navigator.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/my_textfield.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +10,10 @@ class ManageProfileScreen extends StatelessWidget {
   const ManageProfileScreen({
     super.key,
     required this.mediaQuery,
+    required this.nav,
   });
   final MediaQueryHandler mediaQuery;
+  final NavigatorHandler nav;
 
   @override
   Widget build(BuildContext context) {
@@ -78,9 +81,11 @@ class ManageProfileScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 10),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
                 child: CustomAppbar(
+                  nav: nav,
+                  mediaQuery: mediaQuery,
                   title: 'Profile',
                   leftIcon: 'icon_arrow_left',
                   rightIcon: 'icon_notification',
@@ -193,7 +198,9 @@ class __FieldsSectionState extends State<_FieldsSection> {
             height: 63,
             width: widget.mediaQuery.screenWidth(context),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               child: const Text(
                 'Save',
                 style: TextStyle(color: Colors.white),

@@ -1,7 +1,18 @@
 import 'package:fintech/constatns/color_constants.dart';
+import 'package:fintech/ui/bank_transfer_screen.dart';
+import 'package:fintech/ui/bill_payment_screen.dart';
+import 'package:fintech/ui/card_setting_screen.dart';
+import 'package:fintech/ui/donation_screen.dart';
+import 'package:fintech/ui/insurance_screen.dart';
+import 'package:fintech/ui/money_transfer.dart';
+import 'package:fintech/ui/netflix_payment_screen.dart';
+import 'package:fintech/ui/payment_loan_screen.dart';
+import 'package:fintech/ui/recharge_screen.dart';
+import 'package:fintech/ui/send_gift_screen.dart';
 import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
+import 'package:fintech/util/navigator.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/custom_box.dart';
 import 'package:fintech/widget/custom_grid_box.dart';
@@ -14,8 +25,10 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({
     super.key,
     required this.mediaQuery,
+    required this.nav,
   });
   final MediaQueryHandler mediaQuery;
+  final NavigatorHandler nav;
 
   @override
   Widget build(BuildContext context) {
@@ -32,20 +45,27 @@ class HomeScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 25),
                     sliver: SliverToBoxAdapter(
                       child: _CardListSection(
+                        navigator: nav,
                         mediaQuery: mediaQuery,
                       ),
                     ),
                   ),
-                  const SliverPadding(
-                    padding: EdgeInsets.only(bottom: 25),
+                  SliverPadding(
+                    padding: const EdgeInsets.only(bottom: 25),
                     sliver: SliverToBoxAdapter(
-                      child: _QuickActionSection(),
+                      child: _QuickActionSection(
+                        navigator: nav,
+                        mediaQuery: mediaQuery,
+                      ),
                     ),
                   ),
-                  const SliverPadding(
-                    padding: EdgeInsets.only(bottom: 30),
+                  SliverPadding(
+                    padding: const EdgeInsets.only(bottom: 30),
                     sliver: SliverToBoxAdapter(
-                      child: _ServicesSection(),
+                      child: _ServicesSection(
+                        mediaQuery: mediaQuery,
+                        navigator: nav,
+                      ),
                     ),
                   ),
                   SliverPadding(
@@ -58,14 +78,17 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   _PaymentsSection(
+                    navigator: nav,
                     mediaQuery: mediaQuery,
                   ),
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10, right: 30, left: 30),
+            Padding(
+              padding: const EdgeInsets.only(top: 10, right: 30, left: 30),
               child: CustomAppbar(
+                nav: nav,
+                mediaQuery: mediaQuery,
                 title: 'Fintech',
                 leftIcon: 'my_photo.jpg',
                 isLeftProfile: true,
@@ -80,7 +103,12 @@ class HomeScreen extends StatelessWidget {
 }
 
 class _QuickActionSection extends StatefulWidget {
-  const _QuickActionSection();
+  const _QuickActionSection({
+    required this.mediaQuery,
+    required this.navigator,
+  });
+  final MediaQueryHandler mediaQuery;
+  final NavigatorHandler navigator;
 
   @override
   State<_QuickActionSection> createState() => __QuickActionSectionState();
@@ -99,7 +127,7 @@ class __QuickActionSectionState extends State<_QuickActionSection> {
     const Color(0xff8e949a),
   ];
 
-  int selectedIndex = 0;
+  int selectedIndex = 3;
 
   @override
   Widget build(BuildContext context) {
@@ -125,6 +153,7 @@ class __QuickActionSectionState extends State<_QuickActionSection> {
                       setState(() {
                         selectedIndex = index;
                       });
+                      widget.navigator.fadeNav(context, pageConditions());
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(right: 10),
@@ -181,13 +210,41 @@ class __QuickActionSectionState extends State<_QuickActionSection> {
       ),
     );
   }
+
+  Widget pageConditions() {
+    switch (selectedIndex) {
+      case 0:
+        return MoneyTransferScreen(
+          mediaQuery: widget.mediaQuery,
+          nav: widget.navigator,
+        );
+      case 1:
+        return BillPaymentScreen(
+          mediaQuery: widget.mediaQuery,
+          nav: widget.navigator,
+        );
+      case 2:
+        return BankTransferScreen(
+          mediaQuery: widget.mediaQuery,
+          nav: widget.navigator,
+        );
+
+      default:
+        return MoneyTransferScreen(
+          mediaQuery: widget.mediaQuery,
+          nav: widget.navigator,
+        );
+    }
+  }
 }
 
 class _CardListSection extends StatefulWidget {
   const _CardListSection({
     required this.mediaQuery,
+    required this.navigator,
   });
   final MediaQueryHandler mediaQuery;
+  final NavigatorHandler navigator;
 
   @override
   State<_CardListSection> createState() => _CardListSectionState();
@@ -199,7 +256,7 @@ class _CardListSectionState extends State<_CardListSection> {
   @override
   void initState() {
     super.initState();
-    controller = PageController(viewportFraction: 0.8);
+    controller = PageController(viewportFraction: 0.9);
   }
 
   @override
@@ -218,9 +275,18 @@ class _CardListSectionState extends State<_CardListSection> {
           child: PageView.builder(
             controller: controller,
             itemBuilder: (context, index) {
-              return CustomMasterCard(
-                backgroundColor:
-                    (index == 0) ? AppColor.blueColor : AppColor.greenDark,
+              return GestureDetector(
+                onTap: () => widget.navigator.fadeNav(
+                  context,
+                  CardSettingScreen(
+                    mediaQuery: widget.mediaQuery,
+                    nav: widget.navigator,
+                  ),
+                ),
+                child: CustomMasterCard(
+                  backgroundColor:
+                      (index == 0) ? AppColor.blueColor : AppColor.greenDark,
+                ),
               );
             },
             itemCount: 2,
@@ -244,7 +310,12 @@ class _CardListSectionState extends State<_CardListSection> {
 }
 
 class _ServicesSection extends StatefulWidget {
-  const _ServicesSection();
+  const _ServicesSection({
+    required this.navigator,
+    required this.mediaQuery,
+  });
+  final NavigatorHandler navigator;
+  final MediaQueryHandler mediaQuery;
 
   @override
   State<_ServicesSection> createState() => _ServicesSectionState();
@@ -285,6 +356,7 @@ class _ServicesSectionState extends State<_ServicesSection> {
                       setState(() {
                         selectedIndex = index;
                       });
+                      widget.navigator.fadeNav(context, pageConditions());
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(right: 10),
@@ -339,13 +411,51 @@ class _ServicesSectionState extends State<_ServicesSection> {
       ),
     );
   }
+
+  Widget pageConditions() {
+    switch (selectedIndex) {
+      case 0:
+        return RechargeScreen(
+          mediaQuery: widget.mediaQuery,
+          nav: widget.navigator,
+        );
+      case 1:
+        return DonationScreen(
+          mediaQuery: widget.mediaQuery,
+          nav: widget.navigator,
+        );
+      case 2:
+        return PaymentLoanScreen(
+          mediaQuery: widget.mediaQuery,
+          nav: widget.navigator,
+        );
+      case 3:
+        return SendGiftScreen(
+          mediaQuery: widget.mediaQuery,
+          nav: widget.navigator,
+        );
+      case 4:
+        return InsuranceScreen(
+          mediaQuery: widget.mediaQuery,
+          nav: widget.navigator,
+        );
+
+      default:
+        return RechargeScreen(
+          mediaQuery: widget.mediaQuery,
+          nav: widget.navigator,
+        );
+    }
+  }
 }
 
 class _PaymentsSection extends StatelessWidget {
   const _PaymentsSection({
     required this.mediaQuery,
+    required this.navigator,
   });
   final MediaQueryHandler mediaQuery;
+  final NavigatorHandler navigator;
 
   @override
   Widget build(BuildContext context) {
@@ -356,93 +466,102 @@ class _PaymentsSection extends StatelessWidget {
           [
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
-              child: CustomBox(
-                height: 81,
-                mediaQuery: mediaQuery,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  child: Row(
-                    children: [
-                      const ClipRRect(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                        child: SizedBox(
-                          height: 51,
-                          width: 51,
-                          child: ColoredBox(
-                            color: AppColor.blackColor,
+              child: GestureDetector(
+                onTap: () => navigator.fadeNav(
+                  context,
+                  NetflixPaymentScreen(
+                    mediaQuery: mediaQuery,
+                    nav: navigator,
+                  ),
+                ),
+                child: CustomBox(
+                  height: 81,
+                  mediaQuery: mediaQuery,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: Row(
+                      children: [
+                        const ClipRRect(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
                           ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Netflix',
-                            style: TextStyle(
-                              fontSize: 16,
+                          child: SizedBox(
+                            height: 51,
+                            width: 51,
+                            child: ColoredBox(
                               color: AppColor.blackColor,
-                              fontFamily: 'SM',
                             ),
                           ),
-                          Spacer(),
-                          Row(
+                        ),
+                        const SizedBox(width: 10),
+                        const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Netflix',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: AppColor.blackColor,
+                                fontFamily: 'SM',
+                              ),
+                            ),
+                            Spacer(),
+                            Row(
+                              children: [
+                                Text(
+                                  'Next Payment: ',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: AppColor.greyColor200,
+                                    fontFamily: 'SM',
+                                  ),
+                                ),
+                                Text(
+                                  '12/04',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: AppColor.blueColor,
+                                    fontFamily: 'SM',
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                        RichText(
+                          text: const TextSpan(
                             children: [
-                              Text(
-                                'Next Payment: ',
+                              TextSpan(
+                                text: '\$',
                                 style: TextStyle(
-                                  fontSize: 14,
-                                  color: AppColor.greyColor200,
                                   fontFamily: 'SM',
+                                  fontSize: 18,
+                                  color: AppColor.blackColor,
                                 ),
                               ),
-                              Text(
-                                '12/04',
+                              TextSpan(
+                                text: '1.00',
                                 style: TextStyle(
-                                  fontSize: 14,
-                                  color: AppColor.blueColor,
+                                  fontFamily: 'SB',
+                                  fontSize: 20,
+                                  color: AppColor.blackColor,
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'USD',
+                                style: TextStyle(
                                   fontFamily: 'SM',
+                                  fontSize: 10,
+                                  color: AppColor.blackColor,
                                 ),
                               ),
                             ],
                           ),
-                        ],
-                      ),
-                      const Spacer(),
-                      RichText(
-                        text: const TextSpan(
-                          children: [
-                            TextSpan(
-                              text: '\$',
-                              style: TextStyle(
-                                fontFamily: 'SM',
-                                fontSize: 18,
-                                color: AppColor.blackColor,
-                              ),
-                            ),
-                            TextSpan(
-                              text: '1.00',
-                              style: TextStyle(
-                                fontFamily: 'SB',
-                                fontSize: 20,
-                                color: AppColor.blackColor,
-                              ),
-                            ),
-                            TextSpan(
-                              text: 'USD',
-                              style: TextStyle(
-                                fontFamily: 'SM',
-                                fontSize: 10,
-                                color: AppColor.blackColor,
-                              ),
-                            ),
-                          ],
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

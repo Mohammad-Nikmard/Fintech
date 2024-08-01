@@ -2,6 +2,7 @@ import 'package:fintech/constatns/color_constants.dart';
 import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
+import 'package:fintech/util/navigator.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/custom_box.dart';
 import 'package:fintech/widget/my_textfield.dart';
@@ -13,8 +14,10 @@ class PaymentLoanScreen extends StatefulWidget {
   const PaymentLoanScreen({
     super.key,
     required this.mediaQuery,
+    required this.nav,
   });
   final MediaQueryHandler mediaQuery;
+  final NavigatorHandler nav;
 
   @override
   State<PaymentLoanScreen> createState() => _PaymentLoanScreenState();
@@ -88,6 +91,8 @@ class _PaymentLoanScreenState extends State<PaymentLoanScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 10, right: 30, left: 30),
               child: CustomAppbar(
+                mediaQuery: widget.mediaQuery,
+                nav: widget.nav,
                 title: (progressIndicator == 0 || progressIndicator == 3)
                     ? 'Loan'
                     : 'Payment Plan',

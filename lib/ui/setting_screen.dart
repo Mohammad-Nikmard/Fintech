@@ -2,6 +2,7 @@ import 'package:fintech/constatns/color_constants.dart';
 import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
+import 'package:fintech/util/navigator.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/custom_box.dart';
 import 'package:fintech/widget/custom_switch_box.dart';
@@ -12,8 +13,10 @@ class SettingScreen extends StatelessWidget {
   const SettingScreen({
     super.key,
     required this.mediaQuery,
+    required this.nav,
   });
   final MediaQueryHandler mediaQuery;
+  final NavigatorHandler nav;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,9 @@ class SettingScreen extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 10),
-              const CustomAppbar(
+              CustomAppbar(
+                nav: nav,
+                mediaQuery: mediaQuery,
                 title: 'Setting',
                 leftIcon: 'icon_arrow_left',
                 rightIcon: 'icon_notification',

@@ -1,6 +1,7 @@
 import 'package:fintech/model/notification.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
+import 'package:fintech/util/navigator.dart';
 import 'package:fintech/util/notifications_enum.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +10,10 @@ class NotificationScreen extends StatelessWidget {
   const NotificationScreen({
     super.key,
     required this.mediaQuery,
+    required this.nav,
   });
   final MediaQueryHandler mediaQuery;
+  final NavigatorHandler nav;
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +63,11 @@ class NotificationScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10, right: 30, left: 30),
+            Padding(
+              padding: const EdgeInsets.only(top: 10, right: 30, left: 30),
               child: CustomAppbar(
+                nav: nav,
+                mediaQuery: mediaQuery,
                 title: 'Notifications',
                 leftIcon: 'icon_arrow_left',
                 rightIcon: 'my_photo.jpg',

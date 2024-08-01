@@ -2,6 +2,7 @@ import 'package:fintech/constatns/color_constants.dart';
 import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
+import 'package:fintech/util/navigator.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,8 +12,10 @@ class PinCodeChangeScreen extends StatefulWidget {
   const PinCodeChangeScreen({
     super.key,
     required this.mediaQuery,
+    required this.nav,
   });
   final MediaQueryHandler mediaQuery;
+  final NavigatorHandler nav;
 
   @override
   State<PinCodeChangeScreen> createState() => _PinCodeChangeScreenState();
@@ -54,6 +57,8 @@ class _PinCodeChangeScreenState extends State<PinCodeChangeScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: CustomAppbar(
+                  nav: widget.nav,
+                  mediaQuery: widget.mediaQuery,
                   title: (progressIndicator == 0)
                       ? 'Mobile Number'
                       : 'OTP Verification',

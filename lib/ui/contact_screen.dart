@@ -2,6 +2,7 @@ import 'package:fintech/constatns/color_constants.dart';
 import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
+import 'package:fintech/util/navigator.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/my_textfield.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +12,10 @@ class ContactScreen extends StatefulWidget {
   const ContactScreen({
     super.key,
     required this.mediaQuery,
+    required this.nav,
   });
   final MediaQueryHandler mediaQuery;
+  final NavigatorHandler nav;
 
   @override
   State<ContactScreen> createState() => _ContactScreenState();
@@ -47,7 +50,9 @@ class _ContactScreenState extends State<ContactScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 10),
-              const CustomAppbar(
+              CustomAppbar(
+                nav: widget.nav,
+                mediaQuery: widget.mediaQuery,
                 title: 'Contact',
                 leftIcon: 'icon_arrow_left',
                 rightIcon: 'icon_notification',

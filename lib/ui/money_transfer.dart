@@ -2,6 +2,7 @@ import 'package:fintech/constatns/color_constants.dart';
 import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
+import 'package:fintech/util/navigator.dart';
 import 'package:fintech/widget/custom_amount_input.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/custom_box.dart';
@@ -17,8 +18,10 @@ class MoneyTransferScreen extends StatefulWidget {
   const MoneyTransferScreen({
     super.key,
     required this.mediaQuery,
+    required this.nav,
   });
   final MediaQueryHandler mediaQuery;
+  final NavigatorHandler nav;
 
   @override
   State<MoneyTransferScreen> createState() => _MoneyTransferScreenState();
@@ -254,6 +257,8 @@ class _MoneyTransferScreenState extends State<MoneyTransferScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: CustomAppbar(
+                  nav: widget.nav,
+                  mediaQuery: widget.mediaQuery,
                   title: (progressIndicator < 1)
                       ? 'Money Transfer'
                       : 'Confirmation',

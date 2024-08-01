@@ -1,6 +1,7 @@
 import 'package:fintech/constatns/color_constants.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
+import 'package:fintech/util/navigator.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/custom_payment_confirmation.dart';
 import 'package:fintech/widget/custom_payment_success.dart';
@@ -13,8 +14,10 @@ class InsuranceScreen extends StatefulWidget {
   const InsuranceScreen({
     super.key,
     required this.mediaQuery,
+    required this.nav,
   });
   final MediaQueryHandler mediaQuery;
+  final NavigatorHandler nav;
 
   @override
   State<InsuranceScreen> createState() => _InsuranceScreenState();
@@ -294,6 +297,8 @@ class _InsuranceScreenState extends State<InsuranceScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: CustomAppbar(
+                  nav: widget.nav,
+                  mediaQuery: widget.mediaQuery,
                   title: (progressIndicator < 3) ? 'Insurance' : 'Confirmation',
                   leftIcon: (progressIndicator > 4)
                       ? 'my_photo.jpg'

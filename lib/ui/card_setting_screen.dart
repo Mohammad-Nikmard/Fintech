@@ -1,7 +1,9 @@
 import 'package:fintech/constatns/color_constants.dart';
+import 'package:fintech/ui/pincode_change_screen.dart';
 import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
+import 'package:fintech/util/navigator.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/custom_box.dart';
 import 'package:fintech/widget/custom_master_card.dart';
@@ -14,8 +16,10 @@ class CardSettingScreen extends StatelessWidget {
   const CardSettingScreen({
     super.key,
     required this.mediaQuery,
+    required this.nav,
   });
   final MediaQueryHandler mediaQuery;
+  final NavigatorHandler nav;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +49,7 @@ class CardSettingScreen extends StatelessWidget {
                         const EdgeInsets.only(right: 30, left: 30, bottom: 35),
                     sliver: SliverToBoxAdapter(
                       child: _SettingSection(
+                        navigator: nav,
                         mediaQuery: mediaQuery,
                       ),
                     ),
@@ -72,9 +77,11 @@ class CardSettingScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10, right: 30, left: 30),
+            Padding(
+              padding: const EdgeInsets.only(top: 10, right: 30, left: 30),
               child: CustomAppbar(
+                nav: nav,
+                mediaQuery: mediaQuery,
                 title: 'My Card',
                 leftIcon: 'icon_arrow_left',
                 isLeftProfile: false,
@@ -261,8 +268,10 @@ class _DataSection extends StatelessWidget {
 class _SettingSection extends StatelessWidget {
   const _SettingSection({
     required this.mediaQuery,
+    required this.navigator,
   });
   final MediaQueryHandler mediaQuery;
+  final NavigatorHandler navigator;
 
   @override
   Widget build(BuildContext context) {
@@ -274,43 +283,66 @@ class _SettingSection extends StatelessWidget {
           style: context.headlineMedium,
         ),
         const SizedBox(height: 15),
-        CustomBox(
-          height: 60,
-          mediaQuery: mediaQuery,
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(7),
-                ),
-                child: SizedBox(
-                  height: 29,
-                  width: 29,
-                  child: ColoredBox(
-                    color: AppColor.greenLight,
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: SvgPicture.asset(
-                        'icon_sheild'.toSvg,
-                        colorFilter: const ColorFilter.mode(
-                          AppColor.greenDark,
-                          BlendMode.srcIn,
+        GestureDetector(
+          onTap: () => navigator.fadeNav(
+            context,
+            PinCodeChangeScreen(mediaQuery: mediaQuery, nav: navigator),
+          ),
+          child: CustomBox(
+            height: 60,
+            mediaQuery: mediaQuery,
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(7),
+                  ),
+                  child: SizedBox(
+                    height: 29,
+                    width: 29,
+                    child: ColoredBox(
+                      color: AppColor.greenLight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: SvgPicture.asset(
+                          'icon_sheild'.toSvg,
+                          colorFilter: const ColorFilter.mode(
+                            AppColor.greenDark,
+                            BlendMode.srcIn,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(width: 15),
-              const Text(
-                'Change Pin',
-                style: TextStyle(
-                  fontFamily: 'SM',
-                  fontSize: 16,
-                  color: AppColor.blackColor,
+                const SizedBox(width: 15),
+                const Text(
+                  'Change Pin',
+                  style: TextStyle(
+                    fontFamily: 'SM',
+                    fontSize: 16,
+                    color: AppColor.blackColor,
+                  ),
                 ),
-              ),
-            ],
+                const Spacer(),
+                ClipRRect(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(5),
+                  ),
+                  child: SizedBox(
+                    height: 26,
+                    width: 26,
+                    child: ColoredBox(
+                      color: AppColor.blueLight,
+                      child: const Icon(
+                        Icons.keyboard_arrow_right,
+                        color: AppColor.blueColor,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         const SizedBox(height: 15),

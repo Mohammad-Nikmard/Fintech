@@ -1,6 +1,6 @@
 import 'package:fintech/DI/service_locator.dart';
 import 'package:fintech/theme/light_theme.dart';
-import 'package:fintech/ui/money_transfer.dart';
+import 'package:fintech/ui/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,8 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MoneyTransferScreen(
+      home: HomeScreen(
         mediaQuery: locator.get(),
+        nav: locator.get(),
       ),
       theme: lightTheme,
     );
