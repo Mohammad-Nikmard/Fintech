@@ -1,6 +1,9 @@
 import 'package:fintech/constatns/color_constants.dart';
+import 'package:fintech/ui/login_screen.dart';
+import 'package:fintech/ui/set_fingerprin_screen.dart';
 import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
+import 'package:fintech/util/navigator.dart';
 import 'package:fintech/widget/my_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,8 +12,10 @@ class SignUpScreen extends StatefulWidget {
   const SignUpScreen({
     super.key,
     required this.mediaQuery,
+    required this.navigator,
   });
   final MediaQueryHandler mediaQuery;
+  final NavigatorHandler navigator;
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -273,7 +278,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         height: 63,
                         width: widget.mediaQuery.screenWidth(context),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () => widget.navigator.fadeNav(
+                            context,
+                            SetFingerprintScreen(
+                              navigator: widget.navigator,
+                              mediaQuery: widget.mediaQuery,
+                            ),
+                          ),
                           child: const Text(
                             'Login',
                             style: TextStyle(
@@ -284,27 +295,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       const SizedBox(height: 26.4),
                       Center(
-                        child: RichText(
-                          text: const TextSpan(
-                            children: [
-                              TextSpan(
-                                text: "Don't have an account? ",
-                                style: TextStyle(
-                                  fontFamily: 'SM',
-                                  fontSize: 18,
-                                  color: AppColor.greyColor200,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Don't have an account? ",
+                              style: TextStyle(
+                                fontFamily: 'SM',
+                                fontSize: 18,
+                                color: AppColor.greyColor200,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => widget.navigator.fadeNav(
+                                context,
+                                LoginScreen(
+                                  mediaQuery: widget.mediaQuery,
+                                  navigator: widget.navigator,
                                 ),
                               ),
-                              TextSpan(
-                                text: 'Sign Up',
+                              child: const Text(
+                                'Login',
                                 style: TextStyle(
                                   fontFamily: 'SM',
                                   fontSize: 18,
                                   color: Colors.white,
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ],

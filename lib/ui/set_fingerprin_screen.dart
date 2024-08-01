@@ -1,10 +1,18 @@
 import 'package:fintech/constatns/color_constants.dart';
 import 'package:fintech/util/extensions/string_extension.dart';
+import 'package:fintech/util/mediaquery_handler.dart';
+import 'package:fintech/util/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SetFingerprintScreen extends StatefulWidget {
-  const SetFingerprintScreen({super.key});
+  const SetFingerprintScreen({
+    super.key,
+    required this.mediaQuery,
+    required this.navigator,
+  });
+  final MediaQueryHandler mediaQuery;
+  final NavigatorHandler navigator;
 
   @override
   State<SetFingerprintScreen> createState() => _SetFingerprintScreenState();
