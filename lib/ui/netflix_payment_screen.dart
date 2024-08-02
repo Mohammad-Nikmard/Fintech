@@ -1,5 +1,4 @@
 import 'package:fintech/constatns/color_constants.dart';
-import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
 import 'package:fintech/util/navigator.dart';
@@ -10,7 +9,6 @@ import 'package:fintech/widget/custom_payment_success.dart';
 import 'package:fintech/widget/custom_receipt_content.dart';
 import 'package:fintech/widget/my_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class NetflixPaymentScreen extends StatefulWidget {
   const NetflixPaymentScreen({
@@ -121,17 +119,17 @@ class _NetflixPaymentScreenState extends State<NetflixPaymentScreen> {
                     ),
                     amount: '1.00',
                     paymentStatus: 'Unpaid',
-                    icon: const Positioned(
+                    icon: Positioned(
                       top: -35,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(10),
                         ),
                         child: SizedBox(
                           height: 75,
                           width: 75,
-                          child: ColoredBox(
-                            color: Colors.black,
+                          child: Image.asset(
+                            'assets/images/icon_netflix.png',
                           ),
                         ),
                       ),
@@ -152,17 +150,17 @@ class _NetflixPaymentScreenState extends State<NetflixPaymentScreen> {
                     title: 'Transfer Successful',
                     receipt: CustomReceiptContent(
                       subtitle: '*******4183',
-                      icon: const Positioned(
+                      icon: Positioned(
                         top: -35,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.all(
+                          borderRadius: const BorderRadius.all(
                             Radius.circular(10),
                           ),
                           child: SizedBox(
                             height: 75,
                             width: 75,
-                            child: ColoredBox(
-                              color: Colors.black,
+                            child: Image.asset(
+                              'assets/images/icon_netflix.png',
                             ),
                           ),
                         ),
@@ -346,8 +344,8 @@ class _PaymentFeildsState extends State<_PaymentFeilds> {
                     height: 51,
                     width: 51,
                     child: Center(
-                      child: SvgPicture.asset(
-                        'icon_netflix'.toSvg,
+                      child: Image.asset(
+                        'assets/images/icon_netflix.png',
                       ),
                     ),
                   ),

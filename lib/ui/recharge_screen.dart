@@ -131,11 +131,13 @@ class _RechargeScreenState extends State<RechargeScreen> {
                     ),
                     amount: selectedAmount.substring(1),
                     paymentStatus: 'Pending',
-                    icon: const Positioned(
+                    icon: Positioned(
                       top: -45,
                       child: CircleAvatar(
                         radius: 45,
-                        backgroundColor: Colors.black,
+                        backgroundImage: AssetImage(
+                          'assets/images/$selectedNetwork.png',
+                        ),
                       ),
                     ),
                     text:
@@ -155,11 +157,13 @@ class _RechargeScreenState extends State<RechargeScreen> {
                     title: 'Transfer Successful',
                     receipt: CustomReceiptContent(
                       subtitle: '*******4183',
-                      icon: const Positioned(
+                      icon: Positioned(
                         top: -40,
                         child: CircleAvatar(
                           radius: 40,
-                          backgroundColor: Colors.black,
+                          backgroundImage: AssetImage(
+                            'assets/images/$selectedNetwork.png',
+                          ),
                         ),
                       ),
                       title: selectedNetwork,
@@ -351,9 +355,11 @@ class _RechargeSectionState extends State<_RechargeSection> {
                     selectedIndex: selectedIndex,
                     child: Column(
                       children: [
-                        const CircleAvatar(
+                        CircleAvatar(
                           radius: 26,
-                          backgroundColor: Colors.black,
+                          backgroundImage: AssetImage(
+                            'assets/images/${networkList[index]}.png',
+                          ),
                         ),
                         const SizedBox(height: 10),
                         Text(

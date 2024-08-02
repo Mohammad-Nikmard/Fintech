@@ -435,12 +435,6 @@ class _RecentTransactionSectionState extends State<_RecentTransactionSection> {
     '1 Month age',
   ];
 
-  List<String> icons = [
-    'icon_dropbox',
-    'icon_apple',
-    'icon_linkedin',
-  ];
-
   List<String> prices = [
     '10.00',
     '8.50',
@@ -459,10 +453,8 @@ class _RecentTransactionSectionState extends State<_RecentTransactionSection> {
               mediaQuery: widget.mediaQuery,
               child: Row(
                 children: [
-                  SvgPicture.asset(
-                    icons[index].toSvg,
-                    height: 51,
-                    width: 51,
+                  Image.asset(
+                    'assets/images/${titles[index]}.png',
                   ),
                   const SizedBox(width: 16),
                   Column(

@@ -481,15 +481,15 @@ class _PaymentsSection extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     child: Row(
                       children: [
-                        const ClipRRect(
-                          borderRadius: BorderRadius.all(
+                        ClipRRect(
+                          borderRadius: const BorderRadius.all(
                             Radius.circular(10),
                           ),
                           child: SizedBox(
                             height: 51,
                             width: 51,
-                            child: ColoredBox(
-                              color: AppColor.blackColor,
+                            child: Image.asset(
+                              'assets/images/icon_netflix.png',
                             ),
                           ),
                         ),
@@ -575,15 +575,15 @@ class _PaymentsSection extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   child: Row(
                     children: [
-                      const ClipRRect(
-                        borderRadius: BorderRadius.all(
+                      ClipRRect(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(10),
                         ),
                         child: SizedBox(
                           height: 51,
                           width: 51,
-                          child: ColoredBox(
-                            color: AppColor.blackColor,
+                          child: Image.asset(
+                            'assets/images/icon_paypal.png',
                           ),
                         ),
                       ),
@@ -668,15 +668,15 @@ class _PaymentsSection extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   child: Row(
                     children: [
-                      const ClipRRect(
-                        borderRadius: BorderRadius.all(
+                      ClipRRect(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(10),
                         ),
                         child: SizedBox(
                           height: 51,
                           width: 51,
-                          child: ColoredBox(
-                            color: AppColor.blackColor,
+                          child: Image.asset(
+                            'assets/images/icon_spotify.png',
                           ),
                         ),
                       ),

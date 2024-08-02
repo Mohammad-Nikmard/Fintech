@@ -6,6 +6,7 @@ import 'package:fintech/util/navigator.dart';
 import 'package:fintech/widget/custom_appbar.dart';
 import 'package:fintech/widget/custom_box.dart';
 import 'package:fintech/widget/my_textfield.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
@@ -122,13 +123,13 @@ class _LoanScreenContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Center(
+        const Center(
           child: Text(
             'Car Loan',
             style: TextStyle(
               fontFamily: 'SSB',
               fontSize: 15,
-              color: context.secondaryContainer,
+              color: AppColor.greyColor200,
             ),
           ),
         ),
@@ -166,35 +167,45 @@ class _LoanScreenContent extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 5),
-            SvgPicture.asset(
-              'us_vector'.toSvg,
-              height: 17,
-              width: 17,
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Image.asset(
+                'assets/images/us_vector.png',
+              ),
             ),
           ],
         ),
         const SizedBox(height: 30),
-        Center(
-          child: Container(
-            height: 130,
-            width: 130,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColor.redLight,
+        Stack(
+          alignment: AlignmentDirectional.center,
+          children: [
+            const Text(
+              '50%',
+              style: TextStyle(
+                fontFamily: 'SSB',
+                fontSize: 32,
+                color: AppColor.blackColor,
+              ),
             ),
-            child: const Center(
-              child: Text(
-                '50%',
-                style: TextStyle(
-                  fontFamily: 'SSB',
-                  fontSize: 32,
-                  color: AppColor.blackColor,
+            SizedBox(
+              height: 150,
+              child: RotatedBox(
+                quarterTurns: 45,
+                child: PieChart(
+                  PieChartData(
+                    borderData: FlBorderData(
+                      show: false,
+                    ),
+                    sectionsSpace: 0,
+                    centerSpaceRadius: 63,
+                    sections: showingSections(),
+                  ),
                 ),
               ),
             ),
-          ),
+          ],
         ),
-        const SizedBox(height: 30),
+        const SizedBox(height: 50),
         SizedBox(
           height: 68,
           width: mediaQuery.screenWidth(context),
@@ -326,6 +337,39 @@ class _LoanScreenContent extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  List<PieChartSectionData> showingSections() {
+    return List.generate(
+      3,
+      (i) {
+        switch (i) {
+          case 0:
+            return PieChartSectionData(
+              color: AppColor.blueColor,
+              value: 50,
+              showTitle: false,
+              radius: 23,
+            );
+          case 1:
+            return PieChartSectionData(
+              color: AppColor.redDark,
+              value: 25,
+              showTitle: false,
+              radius: 23,
+            );
+          case 2:
+            return PieChartSectionData(
+              color: AppColor.greenDark,
+              value: 25,
+              showTitle: false,
+              radius: 23,
+            );
+          default:
+            throw Error();
+        }
+      },
     );
   }
 }
@@ -1133,8 +1177,9 @@ class _PaymentSuccessSection extends StatelessWidget {
                 color: AppColor.greyColor200,
               ),
             ),
-            SvgPicture.asset(
-              'compromise_vector'.toSvg,
+            const SizedBox(height: 100),
+            Image.asset(
+              'assets/images/compromise_vector.png',
             ),
             const Spacer(),
             Padding(

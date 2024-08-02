@@ -1,8 +1,6 @@
 import 'package:fintech/constatns/color_constants.dart';
-import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class CustomPaymentSuccessful extends StatelessWidget {
   const CustomPaymentSuccessful({
@@ -44,8 +42,8 @@ class CustomPaymentSuccessful extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 70),
-        SvgPicture.asset(
-          'success_vector'.toSvg,
+        Image.asset(
+          'assets/images/success_vector.png',
         ),
         const Spacer(),
         Padding(

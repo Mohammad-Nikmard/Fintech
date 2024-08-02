@@ -31,6 +31,7 @@ class _MoneyTransferScreenState extends State<MoneyTransferScreen> {
   int progressIndicator = 0;
   String amount = '';
   String chosenUser = '';
+  String userName = '';
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +46,11 @@ class _MoneyTransferScreenState extends State<MoneyTransferScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 80),
                   child: _MoneyTransferFields(
+                    chosenName: (value) {
+                      setState(() {
+                        userName = value;
+                      });
+                    },
                     enteredAmount: (value) {
                       setState(() {
                         amount = value;
@@ -67,6 +73,8 @@ class _MoneyTransferScreenState extends State<MoneyTransferScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 80),
                   child: _TransferDetail(
+                    name: userName,
+                    chosenUser: chosenUser,
                     mediaQuery: widget.mediaQuery,
                     selectedAmount: amount,
                     onTapped: () {
@@ -80,7 +88,7 @@ class _MoneyTransferScreenState extends State<MoneyTransferScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 80),
                   child: CustomPaymentConfirmation(
-                    title: 'Mohammad Nikmard',
+                    title: userName,
                     buttonText: 'Send Money',
                     secondRowDescription: Row(
                       children: [
@@ -148,12 +156,12 @@ class _MoneyTransferScreenState extends State<MoneyTransferScreen> {
                     ),
                     amount: amount.substring(1),
                     paymentStatus: 'Unpaid',
-                    icon: const Positioned(
+                    icon: Positioned(
                       top: -40,
                       child: CircleAvatar(
                         radius: 40,
                         backgroundImage:
-                            AssetImage('assets/images/my_photo.jpg'),
+                            AssetImage('assets/images/$chosenUser'),
                       ),
                     ),
                     text:
@@ -173,16 +181,16 @@ class _MoneyTransferScreenState extends State<MoneyTransferScreen> {
                     title: 'Congratulations!',
                     receipt: CustomReceiptContent(
                       subtitle: '*******4183',
-                      icon: const Positioned(
+                      icon: Positioned(
                         top: -40,
                         child: CircleAvatar(
                           radius: 40,
                           backgroundColor: AppColor.blackColor,
                           backgroundImage:
-                              AssetImage('assets/images/my_photo.jpg'),
+                              AssetImage('assets/images/$chosenUser'),
                         ),
                       ),
-                      title: 'Mohammad Nikmard',
+                      title: userName,
                       amount: amount.substring(1),
                       firstRowContent: const Row(
                         children: [
@@ -281,11 +289,13 @@ class _MoneyTransferFields extends StatefulWidget {
   const _MoneyTransferFields({
     required this.mediaQuery,
     required this.onTapped,
+    required this.chosenName,
     required this.selectedUsser,
     required this.enteredAmount,
   });
   final VoidCallback onTapped;
   final ValueChanged<String> selectedUsser;
+  final ValueChanged<String> chosenName;
   final MediaQueryHandler mediaQuery;
   final ValueChanged<String> enteredAmount;
 
@@ -385,9 +395,11 @@ class __MoneyTransferFieldsState extends State<_MoneyTransferFields> {
                       width: 112,
                       child: Column(
                         children: [
-                          const CircleAvatar(
+                          CircleAvatar(
                             radius: 20,
-                            backgroundColor: Colors.black,
+                            backgroundImage: AssetImage(
+                              'assets/images/randomP-${index + 1}.jpg',
+                            ),
                           ),
                           const SizedBox(height: 5),
                           Text(
@@ -583,8 +595,6 @@ class __MoneyTransferFieldsState extends State<_MoneyTransferFields> {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
-                // widget.selectedUsser('');
-
                 showModalBottomSheet(
                   isScrollControlled: true,
                   context: context,
@@ -595,7 +605,9 @@ class __MoneyTransferFieldsState extends State<_MoneyTransferFields> {
                         widget.enteredAmount(value);
                       },
                       onTapped: () {
-                        // Navigator.pop(context);
+                        widget.chosenName(nameList[selectedIndex]);
+                        widget
+                            .selectedUsser('randomP-${selectedIndex + 1}.jpg');
                         widget.onTapped();
                       },
                     );
@@ -620,11 +632,15 @@ class __MoneyTransferFieldsState extends State<_MoneyTransferFields> {
 class _TransferDetail extends StatelessWidget {
   const _TransferDetail({
     required this.mediaQuery,
+    required this.name,
     required this.selectedAmount,
+    required this.chosenUser,
     required this.onTapped,
   });
   final MediaQueryHandler mediaQuery;
+  final String name;
   final String selectedAmount;
+  final String chosenUser;
   final VoidCallback onTapped;
 
   @override
@@ -658,9 +674,9 @@ class _TransferDetail extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 30,
-                  backgroundImage: AssetImage('assets/images/my_photo.jpg'),
+                  backgroundImage: AssetImage('assets/images/$chosenUser'),
                 ),
                 const SizedBox(width: 15),
                 Column(
@@ -668,7 +684,7 @@ class _TransferDetail extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Mohammad',
+                      name,
                       style: context.headlineMedium,
                     ),
                     const Text(

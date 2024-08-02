@@ -27,6 +27,8 @@ class BankTransferScreen extends StatefulWidget {
 
 class _BankTransferScreenState extends State<BankTransferScreen> {
   int progressIndicator = 0;
+  String selectedBank = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +43,11 @@ class _BankTransferScreenState extends State<BankTransferScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 80),
                   child: _BankOptionsSection(
+                    selectedBank: (value) {
+                      setState(() {
+                        selectedBank = value;
+                      });
+                    },
                     onTapped: () {
                       setState(() {
                         progressIndicator = 1;
@@ -65,6 +72,7 @@ class _BankTransferScreenState extends State<BankTransferScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 80),
                   child: _TransferDescriptionSection(
+                    selectedBank: selectedBank,
                     mediaQuery: widget.mediaQuery,
                     onTapped: () {
                       setState(() {
@@ -287,9 +295,11 @@ class _BankTransferScreenState extends State<BankTransferScreen> {
 class _BankOptionsSection extends StatefulWidget {
   const _BankOptionsSection({
     required this.mediaQuery,
+    required this.selectedBank,
     required this.onTapped,
   });
   final MediaQueryHandler mediaQuery;
+  final ValueChanged<String> selectedBank;
   final VoidCallback onTapped;
 
   @override
@@ -420,8 +430,8 @@ class _BankOptionsSectionState extends State<_BankOptionsSection> {
                             width: 50,
                             child: FittedBox(
                               fit: BoxFit.cover,
-                              child: SvgPicture.asset(
-                                bankNames[index].toSvg,
+                              child: Image.asset(
+                                'assets/images/${bankNames[index]}.png',
                               ),
                             ),
                           ),
@@ -452,6 +462,7 @@ class _BankOptionsSectionState extends State<_BankOptionsSection> {
             width: widget.mediaQuery.screenWidth(context),
             child: ElevatedButton(
               onPressed: () {
+                widget.selectedBank(bankNames[selectedIndex]);
                 widget.onTapped();
               },
               child: const Text(
@@ -709,9 +720,11 @@ class _BankTransferFieldsState extends State<_BankTransferFields> {
 class _TransferDescriptionSection extends StatelessWidget {
   const _TransferDescriptionSection({
     required this.mediaQuery,
+    required this.selectedBank,
     required this.onTapped,
   });
   final MediaQueryHandler mediaQuery;
+  final String selectedBank;
   final VoidCallback onTapped;
 
   @override
@@ -747,7 +760,9 @@ class _TransferDescriptionSection extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   radius: 30,
-                  backgroundImage: AssetImage('assets/images/my_photo.jpg'),
+                  backgroundImage: AssetImage(
+                    'assets/images/my_photo.jpg',
+                  ),
                 ),
                 const SizedBox(width: 15),
                 Column(
@@ -825,8 +840,8 @@ class _TransferDescriptionSection extends StatelessWidget {
                     width: 50,
                     child: FittedBox(
                       fit: BoxFit.cover,
-                      child: SvgPicture.asset(
-                        'Byline Bank'.toSvg,
+                      child: Image.asset(
+                        'assets/images/$selectedBank.png',
                       ),
                     ),
                   ),
