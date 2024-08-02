@@ -1,4 +1,5 @@
 import 'package:fintech/constatns/color_constants.dart';
+import 'package:fintech/ui/analytics_screen.dart';
 import 'package:fintech/ui/home_screen.dart';
 import 'package:fintech/ui/scanner_screen.dart';
 import 'package:fintech/util/extensions/string_extension.dart';
@@ -72,7 +73,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
         mediaQuery: widget.mediaQuery,
         nav: widget.navigator,
       ),
-      Scaffold(),
+      AnalyticsScreen(
+        mediaQuery: widget.mediaQuery,
+        navigator: widget.navigator,
+      ),
       Scaffold(),
     ];
   }
