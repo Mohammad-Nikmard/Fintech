@@ -1,6 +1,6 @@
 import 'package:fintech/DI/service_locator.dart';
 import 'package:fintech/theme/light_theme.dart';
-import 'package:fintech/ui/home_screen.dart';
+import 'package:fintech/ui/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(
+      home: DashboardScreen(
         mediaQuery: locator.get(),
-        nav: locator.get(),
+        navigator: locator.get(),
       ),
       theme: lightTheme,
     );
