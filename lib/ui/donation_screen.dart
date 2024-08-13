@@ -157,8 +157,8 @@ class _DonationScreenState extends State<DonationScreen> {
                       top: -45,
                       child: CircleAvatar(
                         radius: 45,
-                        backgroundImage: AssetImage(
-                            'assets/images/${donation.substring(11)}.png'),
+                        backgroundImage:
+                            AssetImage(donation.substring(11).toPng),
                       ),
                     ),
                     text:
@@ -182,8 +182,8 @@ class _DonationScreenState extends State<DonationScreen> {
                         top: -45,
                         child: CircleAvatar(
                           radius: 45,
-                          backgroundImage: AssetImage(
-                              'assets/images/${donation.substring(11)}.png'),
+                          backgroundImage:
+                              AssetImage(donation.substring(11).toPng),
                         ),
                       ),
                       title: donationOwner,
@@ -363,7 +363,7 @@ class _CharityListState extends State<_CharityList> {
                               child: Column(
                                 children: [
                                   Image.asset(
-                                    'assets/images/${charityList[index].substring(11)}.png',
+                                    charityList[index].substring(11).toPng,
                                   ),
                                 ],
                               ),
@@ -610,7 +610,7 @@ class _AppBar extends StatelessWidget {
                 child: FittedBox(
                   fit: BoxFit.fitWidth,
                   child: Image.asset(
-                    'assets/images/${title.substring(11)}.png',
+                    title.substring(11).toPng,
                   ),
                 ),
               ),
@@ -741,9 +741,9 @@ class _DonationDetails extends StatelessWidget {
           children: [
             Stack(
               children: [
-                const _CircularProfile(
+                _CircularProfile(
                   picture: DecorationImage(
-                    image: AssetImage('assets/images/my_photo.jpg'),
+                    image: AssetImage('my_photo'.toJpg),
                     fit: BoxFit.cover,
                   ),
                 ),

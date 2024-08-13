@@ -1,4 +1,5 @@
 import 'package:fintech/constatns/color_constants.dart';
+import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
 import 'package:fintech/util/navigator.dart';
@@ -182,8 +183,7 @@ class _InsuranceScreenState extends State<InsuranceScreen> {
                       top: -45,
                       child: CircleAvatar(
                         radius: 45,
-                        backgroundImage:
-                            AssetImage('assets/images/$insurance.png'),
+                        backgroundImage: AssetImage(insurance.toPng),
                       ),
                     ),
                     text:
@@ -217,7 +217,7 @@ class _InsuranceScreenState extends State<InsuranceScreen> {
                             ),
                             image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: AssetImage('assets/images/$insurance.png'),
+                              image: AssetImage(insurance.toPng),
                             ),
                           ),
                         ),
@@ -374,7 +374,7 @@ class _InsuranceListState extends State<_InsuranceList> {
                           child: Column(
                             children: [
                               Image.asset(
-                                'assets/images/${insuranceList[index]}.png',
+                                insuranceList[index].toPng,
                               ),
                             ],
                           ),
@@ -520,7 +520,7 @@ class _AppBar extends StatelessWidget {
                 child: FittedBox(
                   fit: BoxFit.fitWidth,
                   child: Image.asset(
-                    'assets/images/$title.png',
+                    title.toPng,
                   ),
                 ),
               ),

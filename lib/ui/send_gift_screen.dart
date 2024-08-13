@@ -160,12 +160,11 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                     ),
                     amount: amount.substring(1),
                     paymentStatus: 'Pending',
-                    icon: const Positioned(
+                    icon: Positioned(
                       top: -45,
                       child: CircleAvatar(
                         radius: 45,
-                        backgroundImage:
-                            AssetImage('assets/images/my_photo.jpg'),
+                        backgroundImage: AssetImage('my_photo'.toJpg),
                       ),
                     ),
                     text:
@@ -197,9 +196,9 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                               width: 2,
                               color: Colors.white,
                             ),
-                            image: const DecorationImage(
+                            image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: AssetImage('assets/images/my_photo.jpg'),
+                              image: AssetImage('my_photo'.toJpg),
                             ),
                           ),
                         ),
@@ -357,7 +356,7 @@ class _GiftListState extends State<_GiftList> {
                           child: Column(
                             children: [
                               Image.asset(
-                                'assets/images/${giftList[index]}.png',
+                                giftList[index].toPng,
                               ),
                             ],
                           ),
@@ -502,7 +501,7 @@ class _AppBar extends StatelessWidget {
                 child: FittedBox(
                   fit: BoxFit.fitWidth,
                   child: Image.asset(
-                    'assets/images/$title.png',
+                    title.toPng,
                   ),
                 ),
               ),
@@ -824,9 +823,9 @@ class _GiftDetails extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 30,
-                  backgroundImage: AssetImage('assets/images/my_photo.jpg'),
+                  backgroundImage: AssetImage('my_photo'.toJpg),
                 ),
                 const SizedBox(width: 15),
                 Column(

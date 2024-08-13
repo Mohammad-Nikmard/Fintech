@@ -153,12 +153,11 @@ class _BankTransferScreenState extends State<BankTransferScreen> {
                     ),
                     amount: '250.00',
                     paymentStatus: 'Pending',
-                    icon: const Positioned(
+                    icon: Positioned(
                       top: -45,
                       child: CircleAvatar(
                         radius: 45,
-                        backgroundImage:
-                            AssetImage('assets/images/my_photo.jpg'),
+                        backgroundImage: AssetImage('my_photo'.toJpg),
                       ),
                     ),
                     text:
@@ -190,9 +189,9 @@ class _BankTransferScreenState extends State<BankTransferScreen> {
                               width: 2,
                               color: Colors.white,
                             ),
-                            image: const DecorationImage(
+                            image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: AssetImage('assets/images/my_photo.jpg'),
+                              image: AssetImage('my_photo'.toJpg),
                             ),
                           ),
                         ),
@@ -431,7 +430,7 @@ class _BankOptionsSectionState extends State<_BankOptionsSection> {
                             child: FittedBox(
                               fit: BoxFit.cover,
                               child: Image.asset(
-                                'assets/images/${bankNames[index]}.png',
+                                bankNames[index].toPng,
                               ),
                             ),
                           ),
@@ -758,10 +757,10 @@ class _TransferDescriptionSection extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 30,
                   backgroundImage: AssetImage(
-                    'assets/images/my_photo.jpg',
+                    'my_photo'.toJpg,
                   ),
                 ),
                 const SizedBox(width: 15),
@@ -841,7 +840,7 @@ class _TransferDescriptionSection extends StatelessWidget {
                     child: FittedBox(
                       fit: BoxFit.cover,
                       child: Image.asset(
-                        'assets/images/$selectedBank.png',
+                        selectedBank.toPng,
                       ),
                     ),
                   ),

@@ -1,5 +1,6 @@
 import 'package:fintech/constatns/color_constants.dart';
 import 'package:fintech/ui/login_screen.dart';
+import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
 import 'package:fintech/util/navigator.dart';
 import 'package:flutter/material.dart';
@@ -205,7 +206,7 @@ class _OnboardingsScreenState extends State<OnboardingsScreen> {
                 right: -55,
                 top: 240,
                 child: Image.asset(
-                  'assets/images/onBoarding_card3.png',
+                  'onBoarding_card3'.toPng,
                   height: 326,
                   width: 326,
                 ),
@@ -215,7 +216,7 @@ class _OnboardingsScreenState extends State<OnboardingsScreen> {
                 left: 10,
                 top: 99,
                 child: Image.asset(
-                  'assets/images/onBoarding_card2.png',
+                  'onBoarding_card2'.toPng,
                   height: 326,
                   width: 326,
                 ),
@@ -224,7 +225,7 @@ class _OnboardingsScreenState extends State<OnboardingsScreen> {
                 left: -55,
                 top: 0,
                 child: Image.asset(
-                  'assets/images/onBoarding_card1.png',
+                  'onBoarding_card1'.toPng,
                   height: 272,
                   width: 272,
                 ),

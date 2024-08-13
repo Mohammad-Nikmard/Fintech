@@ -1,4 +1,5 @@
 import 'package:fintech/constatns/color_constants.dart';
+import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
 import 'package:fintech/util/navigator.dart';
@@ -135,9 +136,7 @@ class _RechargeScreenState extends State<RechargeScreen> {
                       top: -45,
                       child: CircleAvatar(
                         radius: 45,
-                        backgroundImage: AssetImage(
-                          'assets/images/$selectedNetwork.png',
-                        ),
+                        backgroundImage: AssetImage(selectedNetwork.toPng),
                       ),
                     ),
                     text:
@@ -162,7 +161,7 @@ class _RechargeScreenState extends State<RechargeScreen> {
                         child: CircleAvatar(
                           radius: 40,
                           backgroundImage: AssetImage(
-                            'assets/images/$selectedNetwork.png',
+                            selectedNetwork.toPng,
                           ),
                         ),
                       ),
@@ -358,7 +357,7 @@ class _RechargeSectionState extends State<_RechargeSection> {
                         CircleAvatar(
                           radius: 26,
                           backgroundImage: AssetImage(
-                            'assets/images/${networkList[index]}.png',
+                            networkList[index].toPng,
                           ),
                         ),
                         const SizedBox(height: 10),

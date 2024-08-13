@@ -1,4 +1,5 @@
 import 'package:fintech/constatns/color_constants.dart';
+import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
 import 'package:fintech/util/navigator.dart';
@@ -35,10 +36,10 @@ class ManageProfileScreen extends StatelessWidget {
                         Container(
                           height: 91,
                           width: 91,
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                              image: AssetImage('assets/images/my_photo.jpg'),
+                              image: AssetImage('my_photo'.toJpg),
                               fit: BoxFit.cover,
                             ),
                           ),

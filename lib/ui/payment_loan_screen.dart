@@ -170,7 +170,7 @@ class _LoanScreenContent extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 10),
               child: Image.asset(
-                'assets/images/us_vector.png',
+                'us_vector'.toPng,
               ),
             ),
           ],
@@ -1179,7 +1179,7 @@ class _PaymentSuccessSection extends StatelessWidget {
             ),
             const SizedBox(height: 100),
             Image.asset(
-              'assets/images/compromise_vector.png',
+              'compromise_vector'.toPng,
             ),
             const Spacer(),
             Padding(

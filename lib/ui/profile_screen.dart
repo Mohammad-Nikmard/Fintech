@@ -145,10 +145,10 @@ class _ProfileHeader extends StatelessWidget {
               Container(
                 height: 91,
                 width: 91,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                    image: AssetImage('assets/images/my_photo.jpg'),
+                    image: AssetImage('my_photo'.toJpg),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -454,7 +454,7 @@ class _RecentTransactionSectionState extends State<_RecentTransactionSection> {
               child: Row(
                 children: [
                   Image.asset(
-                    'assets/images/${titles[index]}.png',
+                    titles[index].toPng,
                   ),
                   const SizedBox(width: 16),
                   Column(

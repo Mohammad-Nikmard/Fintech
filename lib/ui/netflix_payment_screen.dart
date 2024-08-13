@@ -1,4 +1,5 @@
 import 'package:fintech/constatns/color_constants.dart';
+import 'package:fintech/util/extensions/string_extension.dart';
 import 'package:fintech/util/extensions/theme_extension.dart';
 import 'package:fintech/util/mediaquery_handler.dart';
 import 'package:fintech/util/navigator.dart';
@@ -129,7 +130,7 @@ class _NetflixPaymentScreenState extends State<NetflixPaymentScreen> {
                           height: 75,
                           width: 75,
                           child: Image.asset(
-                            'assets/images/icon_netflix.png',
+                            'icon_netflix'.toPng,
                           ),
                         ),
                       ),
@@ -160,7 +161,7 @@ class _NetflixPaymentScreenState extends State<NetflixPaymentScreen> {
                             height: 75,
                             width: 75,
                             child: Image.asset(
-                              'assets/images/icon_netflix.png',
+                              'icon_netflix'.toPng,
                             ),
                           ),
                         ),
@@ -345,7 +346,7 @@ class _PaymentFeildsState extends State<_PaymentFeilds> {
                     width: 51,
                     child: Center(
                       child: Image.asset(
-                        'assets/images/icon_netflix.png',
+                        'icon_netflix'.toPng,
                       ),
                     ),
                   ),

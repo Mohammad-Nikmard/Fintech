@@ -77,7 +77,7 @@ class AnalyticsScreen extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(top: 10),
                               child: Image.asset(
-                                'assets/images/us_vector.png',
+                                'us_vector'.toPng,
                               ),
                             ),
                           ],
@@ -478,9 +478,7 @@ class _RecentTransactionSectionState extends State<_RecentTransactionSection> {
               mediaQuery: widget.mediaQuery,
               child: Row(
                 children: [
-                  Image.asset(
-                    'assets/images/${titles[index]}.png',
-                  ),
+                  Image.asset(titles[index].toPng),
                   const SizedBox(width: 16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

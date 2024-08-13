@@ -489,7 +489,7 @@ class _PaymentsSection extends StatelessWidget {
                             height: 51,
                             width: 51,
                             child: Image.asset(
-                              'assets/images/icon_netflix.png',
+                              'icon_netflix'.toPng,
                             ),
                           ),
                         ),
@@ -583,7 +583,7 @@ class _PaymentsSection extends StatelessWidget {
                           height: 51,
                           width: 51,
                           child: Image.asset(
-                            'assets/images/icon_paypal.png',
+                            'icon_paypal'.toPng,
                           ),
                         ),
                       ),
@@ -676,7 +676,7 @@ class _PaymentsSection extends StatelessWidget {
                           height: 51,
                           width: 51,
                           child: Image.asset(
-                            'assets/images/icon_spotify.png',
+                            'icon_spotify'.toPng,
                           ),
                         ),
                       ),

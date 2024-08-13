@@ -4,6 +4,14 @@ extension StringToSvg on String {
   String get toSvg => 'assets/images/$this.svg';
 }
 
+extension StringToPNG on String {
+  String get toPng => 'assets/images/$this.png';
+}
+
+extension StringToJpg on String {
+  String get toJpg => 'assets/images/$this.jpg';
+}
+
 extension LoanDataExtractor on String {
   Map<String, dynamic> get loanValueCalculator {
     switch (this) {
